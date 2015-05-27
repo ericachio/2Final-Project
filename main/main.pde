@@ -1,17 +1,22 @@
 int mode;
 //mode 0 is the menu & 1 is instructions
+PImage arrow;
 
 
 void setup() {
   size(800, 600);
   background(0, 0, 0);
   mode = 0;
+  arrow = loadImage("arrowkeys.jpg");
 }
 
 void draw() {
   background(0, 0, 0);
   if (mode == 0) {
     displayMenu();
+  }
+  if (mode == 1){
+      displayInstructions();
   }
 }
 
@@ -33,7 +38,16 @@ void displayMenu() {
   fill(225);
 }
 
-void mouseClicked() {
+void displayInstructions(){
+  textSize(64);
+  textAlign(CENTER);
+  text("Instructions", 400, 100);
+  image(arrow, 130, 150);
+  textSize(36);        
+  textAlign(CENTER);
+}
+
+void mouseClicked(){
   if (mouseX >= 290 && mouseX <= 515 &&
     mouseY >= 260 && mouseY < 310) {
       mode = 1;
