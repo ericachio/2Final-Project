@@ -43,8 +43,10 @@ void displayInstructions(){
   textAlign(CENTER);
   text("Instructions", 400, 100);
   image(arrow, 130, 150);
-  textSize(36);        
-  textAlign(CENTER);
+  textSize(24);        
+  textAlign(LEFT);
+  text("Press left and right", 200, 200);
+  text("arrows to move player", 200, 230);
 }
 
 void mouseClicked(){
