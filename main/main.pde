@@ -13,6 +13,9 @@ void draw() {
   if (mode == 0) {
     displayMenu();
   }
+  if (mode == 1){
+      displayInstructions();
+  }
 }
 
 void displayMenu() {
@@ -31,6 +34,15 @@ void displayMenu() {
   fill(0);
   text("Play Game", 400, 200);
   fill(225);
+}
+
+void displayInstructions(){
+  textSize(64);
+  textAlign(CENTER);
+  text("Instructions", 400, 100);
+  textSize(36);
+  textAlign(CENTER);
+  
 }
 
 void mouseClicked() {
