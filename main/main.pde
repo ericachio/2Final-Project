@@ -19,6 +19,7 @@ void draw() {
   }
   if(mode == 2){
       play();
+  }
 }
 
 void displayMenu() {
