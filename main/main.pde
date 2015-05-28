@@ -1,5 +1,4 @@
-int mode;
-//mode 0 is the menu & 1 is instructions
+int mode; //mode 0 is the menu & 1 is instructions
 PImage arrow;
 
 
@@ -18,6 +17,8 @@ void draw() {
   if (mode == 1){
       displayInstructions();
   }
+  if(mode == 2){
+      play();
 }
 
 void displayMenu() {
@@ -45,8 +46,14 @@ void displayInstructions(){
   image(arrow, 130, 150);
   textSize(24);        
   textAlign(LEFT);
-  text("Press left and right", 200, 200);
-  text("arrows to move player", 200, 230);
+  text("Press left and right", 330, 200);
+  text("arrow keys to move player", 330, 230);
+  text("Press spacebar to shoot aliens", 330, 260);
+   
+}
+
+void play(){
+  
 }
 
 void mouseClicked(){
