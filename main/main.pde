@@ -1,5 +1,6 @@
 int mode; //mode 0 is the menu & 1 is instructions
 PImage arrow;
+Player player;
 
 
 void setup() {
@@ -7,6 +8,7 @@ void setup() {
   background(0, 0, 0);
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
+  player = new Player();
 }
 
 void draw() {
@@ -59,9 +61,14 @@ void play(){
 
 void mouseClicked(){
   if (mouseX >= 290 && mouseX <= 515 &&
-    mouseY >= 260 && mouseY < 310) {
+    mouseY >= 260 && mouseY <= 310) {
       mode = 1;
-      println(mouseX + ", " + mouseY);
+      println("mode 1");
+  }
+  if (mouseX >= 290 && mouseX <= 515 &&
+     mouseY >= 160 && mouseY <= 210) {
+       mode = 2;     
+       println("mode 2");
+
   }
 }
-
