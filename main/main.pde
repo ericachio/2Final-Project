@@ -9,6 +9,8 @@ void setup() {
   background(0, 0, 0);
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
+  alien = new aliens();
+  load();
 }
 
 void draw() {
@@ -54,11 +56,20 @@ void displayInstructions() {
   text("Press spacebar to shoot aliens", 330, 260);
 }
 
-void play() {
-  alien = new aliens();
-  alien.loadAlien();
-  alien.move();
+void load() {
+  int positionx = 100;
+  int positiony = 100;
+  for (int i = positionx; i < 700; i += 160) {
+    for (int j = positiony; j < 400; j += 160) {
+      alien.loadAlien(i, j);
+    }
+  }
 }
+
+void play() {
+  alien.move(alien.getPX(), alien.getPY());
+}
+
 
 void mouseClicked() {
   if (mouseX >= 290 && mouseX <= 515 &&
