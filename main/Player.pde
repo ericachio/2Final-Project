@@ -1,10 +1,13 @@
 class Player{
   
+  PImage ship;
+  
   int health;
   int points;
   int coins;
   int lives;
   int level;
+  int xcor;
   
   void Player(){
     health = 200;
@@ -12,8 +15,15 @@ class Player{
     coins = 0;
     lives = 3;
     level = 1;
-  }     
- 
+    xcor = 400;
+    ship = loadImage("ship.png");
+  }
+
+  void loadPlayer(){
+     image(ship, xcor, 580);
+  }
+
+    
   int getHealth(){
     return health;
   }
@@ -53,7 +63,17 @@ class Player{
   void setLevel(int n){
     level = n;
   }
-
+  
+  int getX(){
+    return xcor;
+  }
+  
+  void setX(int n){
+    if(n > 0 && n < 800){
+     xcor = n;
+    }
+  }
+  
 }  
     
   
