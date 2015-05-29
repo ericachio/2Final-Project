@@ -3,6 +3,8 @@ int mode; //mode 0 is the menu & 1 is instructions
 PImage arrow;
 Player player;
 
+aliens alien;
+
 
 void setup() {
   size(800, 600);
@@ -10,6 +12,8 @@ void setup() {
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
   player = new Player();
+  alien = new aliens();
+  load();
 }
 
 void draw() {
@@ -17,11 +21,11 @@ void draw() {
   if (mode == 0) {
     displayMenu();
   }
-  if (mode == 1){
-      displayInstructions();
+  if (mode == 1) {
+    displayInstructions();
   }
-  if(mode == 2){
-      play();
+  if (mode == 2) {
+    play();
   }
 }
 
@@ -43,7 +47,7 @@ void displayMenu() {
   fill(225);
 }
 
-void displayInstructions(){
+void displayInstructions() {
   textSize(64);
   textAlign(CENTER);
   text("Instructions", 400, 100);
@@ -53,23 +57,32 @@ void displayInstructions(){
   text("Press left and right", 330, 200);
   text("arrow keys to move player", 330, 230);
   text("Press spacebar to shoot aliens", 330, 260);
-   
 }
 
-void play(){
-  
-}
-
-void mouseClicked(){
-  if (mouseX >= 290 && mouseX <= 515 &&
-      mouseY >= 260 && mouseY <= 310) {
-        mode = 1;
-        println("mode 1");
-  }
-  if (mouseX >= 290 && mouseX <= 515 &&
-      mouseY >= 160 && mouseY <= 210) {
-        mode = 2;     
-        println("mode 2");
-
+void load() {
+  int positionx = 100;
+  int positiony = 100;
+  for (int i = positionx; i < 700; i += 160) {
+    for (int j = positiony; j < 400; j += 160) {
+      alien.loadAlien(i, j);
+    }
   }
 }
+
+void play() {
+  alien.move(alien.getPX(), alien.getPY());
+}
+
+
+void mouseClicked() {
+  if (mouseX >= 290 && mouseX <= 515 &&
+    mouseY >= 260 && mouseY <= 310) {
+    mode = 1;
+    println("mode 1");
+  } else if (mouseX >= 290 && mouseX <= 515 &&
+    mouseY >= 160 && mouseY < 310) {
+    mode = 2;
+    println(mouseX + ", " + mouseY);
+  }
+}
+
