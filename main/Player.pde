@@ -7,22 +7,62 @@ class Player{
   int coins;
   int lives;
   int level;
-  int xcor;
+  int xcor, ycor;
   
-  void Player(){
+  class Bullet{
+    
+    int level;
+    int count;
+    int xcor, ycor;
+    
+    Bullet(int l,int x, int y){
+      level = l;
+      xcor = x;
+      ycor = y;
+    }
+    
+    void loadBullet(){
+      ellipse(xcor, ycor, 10, 30);
+    }
+    
+    int getLevel(){
+      return level;
+    }
+    
+    void setLevel(int n){
+      level = n;
+    }
+    
+    int getY(){
+      return ycor;
+    }
+    
+    void setY(int n){
+      ycor = n;
+    }
+    
+  }
+    
+        
+  
+  Player(){
     health = 200;
     points = 0;
     coins = 0;
     lives = 3;
     level = 1;
-    xcor = 400;
-    ship = loadImage("ship.png");
+    xcor = 380;
+    ycor = 550;
   }
 
   void loadPlayer(){
-     image(ship, xcor, 580);
+     ship = loadImage("ship.png");
+     image(ship, xcor, ycor, 50, 40);
   }
 
+  void shoot(int x, int y){
+     Bullet b = new Bullet(level, x, y);
+  }
     
   int getHealth(){
     return health;

@@ -13,7 +13,7 @@ void setup() {
   arrow = loadImage("arrowkeys.jpg");
   player = new Player();
   alien = new aliens();
-  load();
+  //load();
 }
 
 void draw() {
@@ -67,9 +67,11 @@ void load() {
       alien.loadAlien(i, j);
     }
   }
+  player.loadPlayer();
 }
 
 void play() {
+  load();
   alien.move(alien.getPX(), alien.getPY());
 }
 
@@ -84,5 +86,9 @@ void mouseClicked() {
     mode = 2;
     println(mouseX + ", " + mouseY);
   }
+}
+
+void keyPressed(){
+  
 }
 
