@@ -1,6 +1,7 @@
 
 int mode; //mode 0 is the menu & 1 is instructions
 PImage arrow;
+boolean fired = false;
 Player player;
 
 aliens alien;
@@ -68,6 +69,10 @@ void load() {
     }
   }
   player.loadPlayer();
+  if(player.getStatus()){
+    player.setBY(player.getBY()-10);
+    player.shoot();
+  }
 }
 
 void play() {
@@ -89,6 +94,19 @@ void mouseClicked() {
 }
 
 void keyPressed(){
+  println(keyCode);
+  if(keyCode==37 && mode==2) {
+    player.setX(player.getX()-15);
+  }
+  if(keyCode==39 && mode==2){
+    player.setX(player.getX()+15);
+  }
+  if(keyCode==32 && mode==2){
+    player.setStatus(true);
+    player.setBX(player.getX()+25);
+    player.setBY(player.getY()+5);
+    player.shoot();
+  }
   
 }
 

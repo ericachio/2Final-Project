@@ -1,51 +1,18 @@
-class Player{
-  
+class Player {
+
   PImage ship;
-  
+
   int health;
   int points;
   int coins;
   int lives;
   int level;
   int xcor, ycor;
-  
-  class Bullet{
-    
-    int level;
-    int count;
-    int xcor, ycor;
-    
-    Bullet(int l,int x, int y){
-      level = l;
-      xcor = x;
-      ycor = y;
-    }
-    
-    void loadBullet(){
-      ellipse(xcor, ycor, 10, 30);
-    }
-    
-    int getLevel(){
-      return level;
-    }
-    
-    void setLevel(int n){
-      level = n;
-    }
-    
-    int getY(){
-      return ycor;
-    }
-    
-    void setY(int n){
-      ycor = n;
-    }
-    
-  }
-    
-        
-  
-  Player(){
+  int BXcor, BYcor;
+  boolean fired;
+
+
+  Player() {
     health = 200;
     points = 0;
     coins = 0;
@@ -55,66 +22,105 @@ class Player{
     ycor = 550;
   }
 
-  void loadPlayer(){
-     ship = loadImage("ship.png");
-     image(ship, xcor, ycor, 50, 40);
+  void loadPlayer() {
+    ship = loadImage("ship.png");
+    image(ship, xcor, ycor, 50, 40);
   }
 
-  void shoot(int x, int y){
-     Bullet b = new Bullet(level, x, y);
+  void shoot() {
+    if (fired) {
+      ellipse(BXcor, BYcor, 5, 10);
+    }
   }
-    
-  int getHealth(){
+
+  boolean getStatus() {
+    return fired;
+  }
+
+  void setStatus(boolean f) {
+    fired = f;
+  }
+
+  int getBX() {
+    return BXcor;
+  }
+
+  void setBX(int n) {
+    if (n >= 0 && n < 800) {
+      BXcor = n;
+    }
+  }
+
+  int getBY() {
+    return BYcor;
+  }
+
+  void setBY(int n) {
+    if (n >= 0) {
+      BYcor = n;
+    } else {
+      fired = false;
+    }
+  }
+
+
+  int getHealth() {
     return health;
   }
 
-  void setHealth(int n){
+  void setHealth(int n) {
     health = n;
   }
-  
-  int getPoints(){
+
+  int getPoints() {
     return points;
   }
-  
-  void setPoints(int n){
+
+  void setPoints(int n) {
     points = n;
   }
-  
-  int getCoins(){
+
+  int getCoins() {
     return coins;
   }
-  
-  void setCoins(int n){
+
+  void setCoins(int n) {
     coins = n;
   }
-  
-  int getLives(){
+
+  int getLives() {
     return lives;
   }
-  
-  void setLives(int n){
+
+  void setLives(int n) {
     lives = n;
   }
- 
-  int getLevel(){
+
+  int getLevel() {
     return level;
   }
 
-  void setLevel(int n){
+  void setLevel(int n) {
     level = n;
   }
-  
-  int getX(){
+
+  int getX() {
     return xcor;
   }
-  
-  void setX(int n){
-    if(n > 0 && n < 800){
-     xcor = n;
+
+  void setX(int n) {
+    if (n > 0 && n < 750) {
+      xcor = n;
     }
   }
-  
-}  
-    
-  
 
+  int getY() {
+    return ycor;
+  }
+
+  void setY(int n) {
+    if (n>=0 && n < 400) {
+      ycor = n;
+    }
+  }
+}
