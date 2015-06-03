@@ -4,7 +4,10 @@ PImage arrow;
 boolean fired = false;
 Player player;
 
-aliens alien;
+aliens a1;
+aliens a2;
+aliens a3;
+aliens a4;
 
 
 void setup() {
@@ -13,7 +16,10 @@ void setup() {
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
   player = new Player();
-  alien = new aliens();
+  a1 = new aliens();
+  a2 = new aliens();
+  a3 = new aliens();
+  a4 = new aliens();
   loadA();
 }
 
@@ -69,18 +75,20 @@ void load() {
 }
 
 void loadA() {
-  int positionx = 100;
-  int positiony = 100;
-  for (int i = positionx; i < 700; i += 160) {
-    for (int j = positiony; j < 400; j += 160) {
-      alien.loadAlien(positionx, positiony);
-    }
-  }
+  a1.loadAlien(100, 100);
+  a2.loadAlien(260, 100);
+  a3.loadAlien(420, 100);
+  a4.loadAlien(560, 100);
 }
 
+//
 void play() {
   load();
-  alien.move(alien.getPX(), alien.getPY());
+  a1.move(a1.getPX(), a1.getPY());
+  a2.move(a2.getPX(), a2.getPY());
+  a3.move(a3.getPX(), a3.getPY());
+  a4.move(a4.getPX(), a4.getPY());
+  //alien.move(alien.getPX(), alien.getPY());
 }
 
 
