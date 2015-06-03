@@ -1,4 +1,4 @@
-
+//plz work
 int mode; //mode 0 is the menu & 1 is instructions
 PImage arrow;
 boolean fired = false;
