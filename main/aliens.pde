@@ -12,6 +12,12 @@ class aliens {
     alienHP = 10;
     image(alien, positionx, positiony);
   }
+  
+  void loadRow(int positionx, int positiony){
+    for (int i = positionx; i < 700; i += 160){
+       loadAlien(i, positiony); 
+    }
+  }
 
   int getPX() {
     return px;
