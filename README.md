@@ -21,3 +21,10 @@ tried to get the player and aliens to show up
 player can now move and shoot
 *movement is choppy
 *can only shoot one bullet at a time
+
+6/1/15
+stable working version: https://github.com/ericachio/2Final-Project/tree/master/main
+is in the master branch.
+
+
+GOALS:
