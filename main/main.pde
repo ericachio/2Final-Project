@@ -18,8 +18,8 @@ void setup() {
   player = new Player();
   a1 = new aliens();
   a2 = new aliens();
-  a3 = new aliens();
-  a4 = new aliens();
+  //a3 = new aliens();
+  //a4 = new aliens();
   loadA();
 }
 
@@ -75,19 +75,20 @@ void load() {
 }
 
 void loadA() {
-  a1.loadAlien(100, 100);
-  a2.loadAlien(260, 100);
-  a3.loadAlien(420, 100);
-  a4.loadAlien(560, 100);
+  a1.loadRow(100, 100);
+  a2.loadRow(100, 260);
+  //a3.loadAlien(420, 100);
+  //a4.loadAlien(560, 100);
 }
 
 //
 void play() {
   load();
-  a1.move(a1.getPX(), a1.getPY());
-  a2.move(a2.getPX(), a2.getPY());
-  a3.move(a3.getPX(), a3.getPY());
-  a4.move(a4.getPX(), a4.getPY());
+  a1.printRow();
+  //a1.move(a1.getPX(), a1.getPY());
+  //a2.move(a2.getPX(), a2.getPY());
+  //a3.move(a3.getPX(), a3.getPY());
+  //a4.move(a4.getPX(), a4.getPY());
   //alien.move(alien.getPX(), alien.getPY());
 }
 
