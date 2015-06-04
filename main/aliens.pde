@@ -6,33 +6,18 @@ class aliens {
   int px, py;
   int[] points = new int[10];
 
-  void loadAlien(int positionx, int positiony, int index) {
+  void loadAlien(int positiony) {
     alien = loadImage("alien.jpg");
-    image(alien, positionx, positiony);
-    println("px" + positionx);
-    println("py" + positiony);
-    alienHP = 10;
-  }
-
-  void loadRow(int positionx, int positiony) {
-    int index = 0;
-    for (int i = positionx; i < 700; i = i + 160) {
-      println("positionx" + i);
-      println("positiony" + positiony);
-      points[index] = i;
-      points[index++] = positiony;
-      loadAlien(i, positiony, index);
-      index += 2;
+    for (int i = 50; i < 500; i += 160) {
+      image(alien, i, positiony);
     }
   }
 
-  void printRow() {
-    for (int i = 0; i < 8; i += 2) {
-      //println(points[i], points[i++]);
-      println("indexx" + points[i]);
-      println("indexy" + points[i++]);
-      image(alien, points[i], points[i++]);
-    }
+  void loadRow(int positiony){
+     for (int i = 50; i < 500; i+= 160){
+        loadAlien(positiony);
+     } 
+    
   }
 
   int getPX() {

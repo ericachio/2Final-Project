@@ -20,7 +20,7 @@ void setup() {
   a2 = new aliens();
   //a3 = new aliens();
   //a4 = new aliens();
-  loadA();
+  //loadA();
 }
 
 void draw() {
@@ -75,8 +75,8 @@ void load() {
 }
 
 void loadA() {
-  a1.loadRow(100, 100);
-  a2.loadRow(100, 260);
+  a1.loadAlien(100);
+  //a2.loadRow(100, 260);
   //a3.loadAlien(420, 100);
   //a4.loadAlien(560, 100);
 }
@@ -84,7 +84,7 @@ void loadA() {
 //
 void play() {
   load();
-  a1.printRow();
+  loadA();
   //a1.move(a1.getPX(), a1.getPY());
   //a2.move(a2.getPX(), a2.getPY());
   //a3.move(a3.getPX(), a3.getPY());
