@@ -4,20 +4,26 @@ class aliens {
   PImage alien;
   int alienHP;
   int px, py;
-  int[] points = new int[10];
+  boolean playerAlive;
 
-  void loadAlien(int positiony) {
+  void loadAlien(int positionx, int positiony) {
+    px = positionx;
+    py = positiony;
     alien = loadImage("alien.jpg");
-    for (int i = 50; i < 500; i += 160) {
-      image(alien, i, positiony);
+    image(alien, positionx, positiony);
+  }
+
+  void loadRow(int positionx, int positiony) {
+    for (int i = 50; i < 500; i+= 160) {
+      loadAlien(positionx, positiony);
     }
   }
 
-  void loadRow(int positiony){
-     for (int i = 50; i < 500; i+= 160){
-        loadAlien(positiony);
-     } 
-    
+  void setPosition(int position) {
+    px = position;
+  }
+
+  void loadAa() {
   }
 
   int getPX() {
@@ -36,6 +42,7 @@ class aliens {
         positionx += 1;
         px = positionx;
         py = positiony;
+        playerAlive = true;
       } else {
         image(alien, positionx, positiony + 160);
         move(positionx, positiony + 160);
@@ -48,9 +55,16 @@ class aliens {
         py = positiony;
       } else {
         image(alien, positionx, positiony + 160);
-        //move(positionx, positiony + 160);
+        move(positionx, positiony + 160);
+      }
+    } else if (positiony == 420) { 
+      if (positionx < 600) {
+        image(alien, positionx, positiony);
+        positionx += 1;
+        px = positionx;
+        py = positiony;
+        playerAlive = false;
       }
     }
   }
 }
-
