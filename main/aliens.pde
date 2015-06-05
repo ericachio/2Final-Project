@@ -10,7 +10,7 @@ class aliens {
     px = positionx;
     py = positiony;
     alien = loadImage("alien.jpg");
-    image(alien, positionx, positiony);
+    image(alien, positionx, positiony, 80, 80);
   }
 
   void loadRow(int positionx, int positiony) {
@@ -38,28 +38,28 @@ class aliens {
   void move(int positionx, int positiony) {
     if (positiony == 100) {
       if (positionx < 600) {
-        image(alien, positionx, positiony);
+        image(alien, positionx, positiony, 80, 80);
         positionx += 1;
         px = positionx;
         py = positiony;
         playerAlive = true;
       } else {
-        image(alien, positionx, positiony + 160);
+        image(alien, positionx, positiony, 80, 80);
         move(positionx, positiony + 160);
       }
     } else if (positiony == 260) {
       if (positionx > 100) {
-        image(alien, positionx, positiony);
+        image(alien, positionx, positiony, 80, 80);
         positionx -= 1;
         px = positionx;
         py = positiony;
       } else {
-        image(alien, positionx, positiony + 160);
+        image(alien, positionx, positiony, 80, 80);
         move(positionx, positiony + 160);
       }
     } else if (positiony == 420) { 
       if (positionx < 600) {
-        image(alien, positionx, positiony);
+        image(alien, positionx, positiony, 80, 80);
         positionx += 1;
         px = positionx;
         py = positiony;
