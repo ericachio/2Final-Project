@@ -25,6 +25,10 @@ class Player {
     image(ship, xcor, ycor, 50, 40);
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> player
   int getHealth() {
     return health;
   }
@@ -85,3 +89,4 @@ class Player {
     }
   }
 }
+

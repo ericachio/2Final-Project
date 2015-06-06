@@ -5,9 +5,13 @@ class Bullet {
   boolean fired;
 
   Bullet(int x, int c) {
+<<<<<<< HEAD
     ycor = 545;
     xcor = x;
     count = c;
+=======
+    xcor = x;
+>>>>>>> player
     fired = true;
   }
   
@@ -32,7 +36,11 @@ class Bullet {
   }
 
   int getY() {
+<<<<<<< HEAD
     return ycor;
+=======
+    return Ycor;
+>>>>>>> player
   }
 
   void setY(int n) {
@@ -67,7 +75,11 @@ class Bullet {
   }
 
   void setCount(int n) {
+<<<<<<< HEAD
     count = n;
+=======
+    count = n
+>>>>>>> player
       if (n<=0) {
       fired = false;
     }

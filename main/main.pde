@@ -140,8 +140,13 @@ void keyPressed() {
   if (keyCode==39 && mode==2) {
     player.setX(player.getX()+15);
   }
+<<<<<<< HEAD
   if (keyCode==32 && mode==2) {
     bullets.add(new Bullet(player.getX()+25));
+=======
+  if(keyCode==32 && mode==2){
+    
+>>>>>>> player
   }
 }
 
