@@ -1,23 +1,28 @@
 //comments
 class aliens {
 
-  PImage alien;
+  PImage alien = loadImage("alien.jpg");
+
   int alienHP;
   int px, py;
+  int level;
   boolean playerAlive;
-
-  void loadAlien(int positionx, int positiony) {
-    px = positionx;
-    py = positiony;
-    alien = loadImage("alien.jpg");
-    image(alien, positionx, positiony, 80, 80);
+  
+  aliens(int x, int y, int l){
+    px =x;
+    py =y;
+    level = l;
   }
 
-  void loadRow(int positionx, int positiony) {
-    for (int i = 50; i < 500; i+= 160) {
-      loadAlien(positionx, positiony);
-    }
+  void loadAlien() {
+    image(alien, px, py, 40, 30);
   }
+
+//  void loadRow(int positionx, int positiony) {
+//    for (int i = 50; i < 500; i+= 160) {
+//      loadAlien(positionx, positiony);
+//    }
+//  }
 
   void setPosition(int position) {
     px = position;
