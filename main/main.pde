@@ -2,7 +2,7 @@ import java.util.*;
 
 //plz work
 int mode; //mode 0 is the menu & 1 is instructions
-PImage arrow, menu;
+PImage arrow, menu, instructions;
 boolean fired = false;
 Player player;
 
@@ -20,6 +20,7 @@ void setup() {
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
   menu = loadImage("menu.png");
+  instructions = loadImage("instructions.png");
   player = new Player();
   a1 = new aliens();
   a2 = new aliens();
@@ -34,7 +35,7 @@ void draw() {
     Menu();
   }
   if (mode == 1) {
-    displayInstructions();
+    Instructions();
   }
   if (mode == 2) {
     play();
@@ -46,9 +47,10 @@ void draw() {
 
 void Menu(){
   image(menu, 100, 30, 600, 550);
-  //text("SPACE INVADERS", 400, 100); 
+}
 
-  
+void Instructions(){
+  image(instructions, 100, 30, 600, 550);
 }
 
 void displayMenu() {
@@ -119,11 +121,14 @@ void play() {
 void mouseClicked() {
    println(mouseX + ", " + mouseY);
   if (mouseX >= 300 && mouseX <= 505 &&
-    mouseY >= 508 && mouseY <= 535) {
+    mouseY >= 508 && mouseY <= 535 && mode == 0) {
     mode = 1; //instr
-  } else if (mouseX >= 346 && mouseX <= 455 &&
-    mouseY >= 455 && mouseY <= 480) {
+  }else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 455 && mouseY <= 480 && mode == 0) {
     mode = 2; //play
+  }else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 484 && mouseY <= 505 && mode == 1){
+    mode = 2;
   }
 }
 
