@@ -1,8 +1,12 @@
+import java.util.*;
+
 //plz work
 int mode; //mode 0 is the menu & 1 is instructions
-PImage arrow;
+PImage arrow, menu;
 boolean fired = false;
 Player player;
+
+List<Bullet> bullets = new ArrayList<Bullet>();
 
 aliens a1;
 aliens a2;
@@ -15,6 +19,7 @@ void setup() {
   background(0, 0, 0);
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
+  menu = loadImage("menu.png");
   player = new Player();
   a1 = new aliens();
   a2 = new aliens();
@@ -26,7 +31,7 @@ void setup() {
 void draw() {
   background(0, 0, 0);
   if (mode == 0) {
-    displayMenu();
+    Menu();
   }
   if (mode == 1) {
     displayInstructions();
@@ -37,6 +42,13 @@ void draw() {
   if (mode == 3) {
     displayGO();
   }
+}
+
+void Menu(){
+  image(menu, 100, 30, 600, 550);
+  //text("SPACE INVADERS", 400, 100); 
+
+  
 }
 
 void displayMenu() {
@@ -75,14 +87,6 @@ void displayGO() {
   text("game over", 400, 100);
 }
 
-void load() {
-  player.loadPlayer();
-  if (player.getStatus()) {
-    player.setBY(player.getBY()-10);
-    player.shoot();
-  }
-}
-
 void loadA() {
   a1.loadAlien(100, 100);
   a2.loadAlien(260, 100);
@@ -92,7 +96,7 @@ void loadA() {
 
 //
 void play() {
-  load();
+  player.loadPlayer();
   //loadA();
   a1.move(a1.getPX(), a1.getPY());
   if (a1.playerAlive == false) {
@@ -102,18 +106,24 @@ void play() {
   a3.move(a3.getPX(), a3.getPY());
   a4.move(a4.getPX(), a4.getPY());
   //alien.move(alien.getPX(), alien.getPY());
-}
+  for( Bullet b:bullets){
+    if(b.isFired()){
+      b.shoot();
+      b.setY(b.getY()-5);
+    }
+  }
+  }
+
 
 
 void mouseClicked() {
-  if (mouseX >= 290 && mouseX <= 515 &&
-    mouseY >= 260 && mouseY <= 310) {
-    mode = 1;
-    println("mode 1");
-  } else if (mouseX >= 290 && mouseX <= 515 &&
-    mouseY >= 160 && mouseY < 310) {
-    mode = 2;
-    println(mouseX + ", " + mouseY);
+   println(mouseX + ", " + mouseY);
+  if (mouseX >= 300 && mouseX <= 505 &&
+    mouseY >= 508 && mouseY <= 535) {
+    mode = 1; //instr
+  } else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 455 && mouseY <= 480) {
+    mode = 2; //play
   }
 }
 
@@ -126,10 +136,7 @@ void keyPressed() {
     player.setX(player.getX()+15);
   }
   if (keyCode==32 && mode==2) {
-    player.setStatus(true);
-    player.setBX(player.getX()+25);
-    player.setBY(player.getY()+5);
-    player.shoot();
+    bullets.add(new Bullet(player.getX()+25));
   }
 }
 
