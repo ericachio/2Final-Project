@@ -34,6 +34,7 @@ void draw() {
     Instructions();
   }
   if (mode == 2) {
+    Background();
     play();
   }
   if (mode == 3) {
@@ -47,6 +48,12 @@ void Menu() {
 
 void Instructions() {
   image(instructions, 100, 30, 600, 550);
+}
+
+void Background(){
+  textSize(22);
+  text("Score: "+player.getPoints(), 50, 50);
+  text("
 }
 
 void displayMenu() {
@@ -110,6 +117,7 @@ void loadA() {
 void play() {
   player.loadPlayer();
   for(aliens a: aliens_){
+    a.moveAlien();
     a.loadAlien();
   }
   for ( Bullet b : bullets) {
