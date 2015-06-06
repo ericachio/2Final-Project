@@ -4,8 +4,13 @@ class Bullet {
   int count;
   boolean fired;
 
-  Bullet(int x) {
+  Bullet(int x, int c) {
     xcor = x;
+    fired = true;
+  }
+  
+  Bullet(int x){
+    this(x,1);
   }
 
   void shoot() {
@@ -36,3 +41,34 @@ class Bullet {
     }
   }
 
+  void setXY(int x, int y) {
+    if (x >= 0 && x < 800) {
+      xcor = x;
+    }
+    if (y >= 0) {
+      ycor = y;
+    } else {
+      fired = false;
+    }
+  }
+
+  boolean isFired() {
+    return fired;
+  }
+
+  void setStatus(boolean b) {
+    fired = b;
+  }
+
+  int getCount() {
+    return count;
+  }
+
+  void setCount(int n) {
+    count = n
+      if (n<=0) {
+      fired = false;
+    }
+  }
+
+}

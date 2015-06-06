@@ -102,10 +102,7 @@ void keyPressed(){
     player.setX(player.getX()+15);
   }
   if(keyCode==32 && mode==2){
-    player.setStatus(true);
-    player.setBX(player.getX()+25);
-    player.setBY(player.getY()+5);
-    player.shoot();
+    
   }
   
 }
