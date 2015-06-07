@@ -3,7 +3,7 @@ import java.util.*;
 //plz work
 int mode; //mode 0 is the menu & 1 is instructions
 int count = 5;
-PImage arrow, menu, instructions, alien;
+PImage arrow, menu, instructions, alien, ship;
 boolean fired = false;
 Player player;
 
@@ -20,6 +20,7 @@ void setup() {
   arrow = loadImage("arrowkeys.jpg");
   menu = loadImage("menu.png");
   alien = loadImage("alien.jpg");
+  ship = loadImage("ship.png");
   instructions = loadImage("instructions.png");
   player = new Player();
   loadA();
@@ -53,7 +54,10 @@ void Instructions() {
 void Background(){
   textSize(22);
   text("Score: "+player.getPoints(), 50, 50);
-  text("
+  text("Lives: "+player.getLives(), 580, 50);
+  for(int i = 0; i < player.getLives(); i++){
+     image(ship, 670 + i*45, 28, 30, 30);
+  }
 }
 
 void displayMenu() {
@@ -152,13 +156,9 @@ void keyPressed() {
   if (keyCode==39 && mode==2) {
     player.setX(player.getX()+20);
   }
-<<<<<<< HEAD
+
   if (keyCode==32 && mode==2) {
     bullets.add(new Bullet(player.getX()+25));
-=======
-  if(keyCode==32 && mode==2){
-    
->>>>>>> player
   }
-}
 
+}

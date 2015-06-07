@@ -1,4 +1,3 @@
-//comments
 class aliens {
 
   PImage alien = loadImage("alien.jpg");
@@ -35,9 +34,6 @@ class aliens {
 
   void setPosition(int position) {
     px = position;
-  }
-
-  void loadAa() {
   }
 
   int getPX() {
@@ -99,5 +95,9 @@ class aliens {
       }
     }
   }
+
 }
+
+
+
 

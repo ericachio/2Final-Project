@@ -1,4 +1,4 @@
-class Player {
+class Player{
 
   PImage ship;
 
@@ -25,10 +25,7 @@ class Player {
     image(ship, xcor, ycor, 50, 40);
   }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> player
   int getHealth() {
     return health;
   }
