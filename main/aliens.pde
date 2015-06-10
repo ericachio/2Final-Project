@@ -43,6 +43,14 @@ class aliens {
         px = positionx;
         py = positiony;
         playerAlive = true;
+      } //else {
+        //image(alien, positionx, positiony, 80, 80);
+        //move(positionx, positiony);
+      } else if (positionx > 100) {
+        image(alien, positionx, positiony, 80, 80);
+        positionx -= 1;
+        px = positionx;
+        py = positiony;
       } else {
         image(alien, positionx, positiony, 80, 80);
         move(positionx, positiony + 160);
