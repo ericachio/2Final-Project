@@ -72,40 +72,39 @@ class aliens {
         py = positiony;
         playerAlive = true;
       } //else {
-        //image(alien, positionx, positiony, 80, 80);
-        //move(positionx, positiony);
-      } else if (positionx > 100) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx -= 1;
-        px = positionx;
-        py = positiony;
-      } else {
-        image(alien, positionx, positiony, 80, 80);
-        move(positionx, positiony + 160);
-      }
-    } else if (positiony == 260) {
-      if (positionx > 100) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx -= 1;
-        px = positionx;
-        py = positiony;
-      } else {
-        image(alien, positionx, positiony, 80, 80);
-        move(positionx, positiony + 160);
-      }
-    } else if (positiony == 420) { 
-      if (positionx < 600) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx += 1;
-        px = positionx;
-        py = positiony;
-        playerAlive = false;
-      }
+      //image(alien, positionx, positiony, 80, 80);
+      //move(positionx, positiony);
+    } else if (positionx > 100) {
+      image(alien, positionx, positiony, 80, 80);
+      positionx -= 1;
+      px = positionx;
+      py = positiony;
+    } else {
+      image(alien, positionx, positiony, 80, 80);
+      move(positionx, positiony + 160);
     }
+  } else if (positiony == 260) {
+  if (positionx > 100) {
+    image(alien, positionx, positiony, 80, 80);
+    positionx -= 1;
+    px = positionx;
+    py = positiony;
+  } else {
+    image(alien, positionx, positiony, 80, 80);
+    move(positionx, positiony + 160);
   }
-
+} else if (positiony == 420) { 
+  if (positionx < 600) {
+    image(alien, positionx, positiony, 80, 80);
+    positionx += 1;
+    px = positionx;
+    py = positiony;
+    playerAlive = false;
+  }
+}
 }
 
+}
 
 
 
