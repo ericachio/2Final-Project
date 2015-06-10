@@ -1,29 +1,39 @@
-//comments
 class aliens {
 
-  PImage alien;
+  PImage alien = loadImage("alien.jpg");
+
   int alienHP;
   int px, py;
+  int level;
+  int count;
+  int steps;
+  int speed;
+  boolean direction;
+  boolean alive;
   boolean playerAlive;
 
-  void loadAlien(int positionx, int positiony) {
-    px = positionx;
-    py = positiony;
-    alien = loadImage("alien.jpg");
-    image(alien, positionx, positiony, 80, 80);
+  aliens(int x, int y, int l) {
+    px =x;
+    py =y;
+    level = l;
+    count = 8;
+    steps = 90;
+    speed = 1;
+    direction = true;
   }
 
-  void loadRow(int positionx, int positiony) {
-    for (int i = 50; i < 500; i+= 160) {
-      loadAlien(positionx, positiony);
-    }
+  void loadAlien() {
+    image(alien, px, py, 40, 30);
   }
+
+  //  void loadRow(int positionx, int positiony) {
+  //    for (int i = 50; i < 500; i+= 160) {
+  //      loadAlien(positionx, positiony);
+  //    }
+  //  }
 
   void setPosition(int position) {
     px = position;
-  }
-
-  void loadAa() {
   }
 
   int getPX() {
@@ -33,6 +43,24 @@ class aliens {
   int getPY() {
     return py;
   }
+
+  void moveAlien() {  
+    if (direction) {
+      px+=speed;
+    } else {
+      px-=speed;
+    }
+    steps--;
+    if (steps == 0) {
+      direction = !direction;
+      count--;
+      steps = 160;
+    }
+    if (count == 0) {
+      py+=80;
+      count = 10;
+    }
+  }  
 
   //will be a recursive to move alien across the screen
   void move(int positionx, int positiony) {
@@ -75,4 +103,9 @@ class aliens {
       }
     }
   }
+
 }
+
+
+
+

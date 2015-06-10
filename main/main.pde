@@ -1,13 +1,17 @@
+import java.util.*;
+
 //plz work
 int mode; //mode 0 is the menu & 1 is instructions
-PImage arrow;
+int count = 5;
+PImage arrow, menu, instructions, alien, ship;
 boolean fired = false;
 Player player;
 
-aliens a1;
-aliens a2;
-aliens a3;
-aliens a4;
+List<Bullet> bullets = new ArrayList<Bullet>();
+
+aliens[] aliens_ = new aliens[30];
+
+Random rand = new Random();
 
 
 void setup() {
@@ -15,27 +19,55 @@ void setup() {
   background(0, 0, 0);
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
+  menu = loadImage("menu.png");
+  alien = loadImage("alien.jpg");
+  ship = loadImage("ship.png");
+  instructions = loadImage("instructions.png");
   player = new Player();
-  a1 = new aliens();
-  a2 = new aliens();
-  a3 = new aliens();
-  a4 = new aliens();
   loadA();
 }
 
 void draw() {
   background(0, 0, 0);
+  if (mouseX >= 300 && mouseX <= 505 &&
+    mouseY >= 508 && mouseY <= 535 && mode == 0) {
+    //instr
+  } else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 455 && mouseY <= 480 && mode == 0) {
+    //play
+  } else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 484 && mouseY <= 505 && mode == 1) {
+    //play
+  }
   if (mode == 0) {
-    displayMenu();
+    Menu();
   }
   if (mode == 1) {
-    displayInstructions();
+    Instructions();
   }
   if (mode == 2) {
+    Background();
     play();
   }
   if (mode == 3) {
     displayGO();
+  }
+}
+
+void Menu() {
+  image(menu, 100, 30, 600, 550);
+}
+
+void Instructions() {
+  image(instructions, 100, 30, 600, 550);
+}
+
+void Background(){
+  textSize(22);
+  text("Score: "+player.getPoints(), 20, 50);
+  text("Lives: "+player.getLives(), 580, 50);
+  for(int i = 0; i < player.getLives(); i++){
+     image(ship, 670 + i*45, 28, 30, 30);
   }
 }
 
@@ -75,61 +107,88 @@ void displayGO() {
   text("game over", 400, 100);
 }
 
-void load() {
-  player.loadPlayer();
-  if (player.getStatus()) {
-    player.setBY(player.getBY()-10);
-    player.shoot();
-  }
-}
+void endGame(){
+
+}  
 
 void loadA() {
-  a1.loadAlien(100, 100);
-  a2.loadAlien(260, 100);
-  a3.loadAlien(420, 100);
-  a4.loadAlien(560, 100);
+  int x = 100;
+  int y = 100;
+  for (int i = 0; i < 10; i++) {
+    aliens_[i] = new aliens(x, y, 3);
+    x+=60;
+  }
+  x = 100;
+  y = 180;
+  for (int i = 10; i < 20; i++) {
+    aliens_[i] = new aliens(x, y, 2);
+    x+= 60;
+  }  
+  x = 100;
+  y = 260;
+  for (int i = 20; i < 30; i++) {
+    aliens_[i] = new aliens(x, y, 1);
+    x+=60;
+  }
 }
 
-//
-void play() {
-  load();
-  //loadA();
-  a1.move(a1.getPX(), a1.getPY());
-  if (a1.playerAlive == false) {
-    mode = 3;
+
+void alienAttack(){
+ for(aliens a: aliens_){
+  if(a.getPX() == player.getX() && rand.nextInt(100) > 95){
+    bullets.add(new Bullet(a.getPX()+25,a.getPY()+25,1,false));
+    println("ayyeyeey");
   }
-  a2.move(a2.getPX(), a2.getPY());
-  a3.move(a3.getPX(), a3.getPY());
-  a4.move(a4.getPX(), a4.getPY());
-  //alien.move(alien.getPX(), alien.getPY());
+ }
+   
 }
+
+void play() {
+  player.loadPlayer();
+  for(aliens a: aliens_){
+    a.moveAlien();
+    a.loadAlien();
+  }
+  alienAttack();
+  for ( Bullet b : bullets) {
+    if (b.isFired()) {
+      b.shoot();
+      b.setY(7);
+    }
+  }
+}
+
 
 
 void mouseClicked() {
-  if (mouseX >= 290 && mouseX <= 515 &&
-    mouseY >= 260 && mouseY <= 310) {
-    mode = 1;
-    println("mode 1");
-  } else if (mouseX >= 290 && mouseX <= 515 &&
-    mouseY >= 160 && mouseY < 310) {
+  println(mouseX + ", " + mouseY);
+  if (mouseX >= 300 && mouseX <= 505 &&
+    mouseY >= 508 && mouseY <= 535 && mode == 0) {
+    mode = 1; //instr
+  } else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 455 && mouseY <= 480 && mode == 0) {
+    mode = 2; //play
+  } else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 484 && mouseY <= 505 && mode == 1) {
     mode = 2;
-    println(mouseX + ", " + mouseY);
   }
 }
 
 void keyPressed() {
   println(keyCode);
   if (keyCode==37 && mode==2) {
-    player.setX(player.getX()-15);
+    player.setX(player.getX()-20);
   }
   if (keyCode==39 && mode==2) {
-    player.setX(player.getX()+15);
+    player.setX(player.getX()+20);
   }
-  if (keyCode==32 && mode==2) {
-    player.setStatus(true);
-    player.setBX(player.getX()+25);
-    player.setBY(player.getY()+5);
-    player.shoot();
-  }
-}
 
+  if (keyCode==32 && mode==2) {
+    bullets.add(new Bullet(player.getX()+25));
+  }
+  if(keyCode==82){
+    mode = 0;
+    loadA();
+  }
+
+}

@@ -26,5 +26,36 @@ player can now move and shoot
 stable working version: https://github.com/ericachio/2Final-Project/tree/master/main
 is in the master branch.
 
+6/4/15
+worked on making the aliens move
+
+6/5/15
+added a bullet class
+
+6/6/15
+fixed shooting bug
+fixed menu and instructions page
+added more aliens
+fixed alien movement
+
 
 GOALS:
+menu and instructions page x
+player class x
+alien class x
+bullet class x
+set up player and aliens x
+player and alien movement x
+player shooting function x
+alien shooting function
+track score, lives, levels, and coins
+game over page
+red ufo thing
+make harder levels --> faster aliens and whatnot 
+add upgrades to player/ship --> laser bullet thing
+walls
+add sound effects and music
+
+
+
+https://github.com/ericachio/2Final-Project/tree/master/main

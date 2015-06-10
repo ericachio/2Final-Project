@@ -1,4 +1,4 @@
-class Player {
+class Player{
 
   PImage ship;
 
@@ -8,8 +8,6 @@ class Player {
   int lives;
   int level;
   int xcor, ycor;
-  int BXcor, BYcor;
-  boolean fired;
 
 
   Player() {
@@ -25,42 +23,6 @@ class Player {
   void loadPlayer() {
     ship = loadImage("ship.png");
     image(ship, xcor, ycor, 50, 40);
-  }
-
-  void shoot() {
-    if (fired) {
-      ellipse(BXcor, BYcor, 5, 10);
-    }
-  }
-
-  boolean getStatus() {
-    return fired;
-  }
-
-  void setStatus(boolean f) {
-    fired = f;
-  }
-
-  int getBX() {
-    return BXcor;
-  }
-
-  void setBX(int n) {
-    if (n >= 0 && n < 800) {
-      BXcor = n;
-    }
-  }
-
-  int getBY() {
-    return BYcor;
-  }
-
-  void setBY(int n) {
-    if (n >= 0) {
-      BYcor = n;
-    } else {
-      fired = false;
-    }
   }
 
 
@@ -124,3 +86,4 @@ class Player {
     }
   }
 }
+
