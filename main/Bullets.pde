@@ -3,18 +3,23 @@ class Bullet {
   int xcor, ycor;
   int count;
   boolean fired;
+  boolean player;
 
-  Bullet(int x, int c) {
-
-    ycor = 545;
+  Bullet(int x, int y, int c, boolean p) {
+    if(p){
+      ycor = 545;
+    }else{
+      ycor = y;
+    }
     xcor = x;
     count = c;
     xcor = x;
+    player = p;
     fired = true;
   }
   
   Bullet(int x){
-    this(x,1);
+    this(x,545,1, true);
   }
 
   void shoot() {
@@ -38,8 +43,10 @@ class Bullet {
   }
 
   void setY(int n) {
-    if (n >= 0) {
-      ycor = n;
+    if (player && ycor - n >= 0) {
+      ycor -= n;
+    }else if(!player && ycor + n <= 600){
+      ycor += n;
     } else {
       fired = false;
     }

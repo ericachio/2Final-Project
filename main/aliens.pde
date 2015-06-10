@@ -16,7 +16,7 @@ class aliens {
     px =x;
     py =y;
     level = l;
-    count = 10;
+    count = 8;
     steps = 90;
     speed = 1;
     direction = true;

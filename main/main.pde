@@ -11,6 +11,7 @@ List<Bullet> bullets = new ArrayList<Bullet>();
 
 aliens[] aliens_ = new aliens[30];
 
+Random rand = new Random();
 
 
 void setup() {
@@ -28,6 +29,16 @@ void setup() {
 
 void draw() {
   background(0, 0, 0);
+  if (mouseX >= 300 && mouseX <= 505 &&
+    mouseY >= 508 && mouseY <= 535 && mode == 0) {
+    //instr
+  } else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 455 && mouseY <= 480 && mode == 0) {
+    //play
+  } else if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 484 && mouseY <= 505 && mode == 1) {
+    //play
+  }
   if (mode == 0) {
     Menu();
   }
@@ -53,7 +64,7 @@ void Instructions() {
 
 void Background(){
   textSize(22);
-  text("Score: "+player.getPoints(), 50, 50);
+  text("Score: "+player.getPoints(), 20, 50);
   text("Lives: "+player.getLives(), 580, 50);
   for(int i = 0; i < player.getLives(); i++){
      image(ship, 670 + i*45, 28, 30, 30);
@@ -96,6 +107,10 @@ void displayGO() {
   text("game over", 400, 100);
 }
 
+void endGame(){
+
+}  
+
 void loadA() {
   int x = 100;
   int y = 100;
@@ -104,30 +119,41 @@ void loadA() {
     x+=60;
   }
   x = 100;
-  y = 200;
+  y = 180;
   for (int i = 10; i < 20; i++) {
     aliens_[i] = new aliens(x, y, 2);
     x+= 60;
   }  
   x = 100;
-  y = 300;
+  y = 260;
   for (int i = 20; i < 30; i++) {
     aliens_[i] = new aliens(x, y, 1);
     x+=60;
   }
 }
 
-//
+
+void alienAttack(){
+ for(aliens a: aliens_){
+  if(a.getPX() == player.getX() && rand.nextInt(100) > 95){
+    bullets.add(new Bullet(a.getPX()+25,a.getPY()+25,1,false));
+    println("ayyeyeey");
+  }
+ }
+   
+}
+
 void play() {
   player.loadPlayer();
   for(aliens a: aliens_){
     a.moveAlien();
     a.loadAlien();
   }
+  alienAttack();
   for ( Bullet b : bullets) {
     if (b.isFired()) {
       b.shoot();
-      b.setY(b.getY()-10);
+      b.setY(7);
     }
   }
 }
@@ -159,6 +185,10 @@ void keyPressed() {
 
   if (keyCode==32 && mode==2) {
     bullets.add(new Bullet(player.getX()+25));
+  }
+  if(keyCode==82){
+    mode = 0;
+    loadA();
   }
 
 }
