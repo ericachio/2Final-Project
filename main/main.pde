@@ -8,8 +8,8 @@ boolean fired = false;
 Player player;
 
 List<Bullet> bullets = new ArrayList<Bullet>();
-
 aliens[] aliens_ = new aliens[30];
+Walls[] walls_ = new Walls[4];
 
 Random rand = new Random();
 
@@ -25,6 +25,7 @@ void setup() {
   instructions = loadImage("instructions.png");
   player = new Player();
   loadA();
+  loadW();
 }
 
 void draw() {
@@ -132,6 +133,14 @@ void loadA() {
   }
 }
 
+void loadW(){
+  int j = 100;
+  for(int i = 0; i < 4; i++){
+    w = new Walls(j, 500);
+    j+=200;
+  }
+}
+
 
 void alienAttack(){
  for(aliens a: aliens_){
@@ -148,6 +157,9 @@ void play() {
   for(aliens a: aliens_){
     a.moveAlien();
     a.loadAlien();
+  }
+  for(Walls w: walls_){
+    w.loadWall();
   }
   alienAttack();
   for ( Bullet b : bullets) {
