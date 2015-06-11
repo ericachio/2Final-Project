@@ -20,6 +20,7 @@ class aliens {
     steps = 90;
     speed = 1;
     direction = true;
+    alive = true;
   }
 
   void loadAlien() {
@@ -74,45 +75,44 @@ class aliens {
       } //else {
       //image(alien, positionx, positiony, 80, 80);
       //move(positionx, positiony);
-    } else if (positionx > 100) {
-      image(alien, positionx, positiony, 80, 80);
-      positionx -= 1;
-      px = positionx;
-      py = positiony;
-    } else {
-      image(alien, positionx, positiony, 80, 80);
-      move(positionx, positiony + 160);
+      else if (positionx > 100) {
+        image(alien, positionx, positiony, 80, 80);
+        positionx -= 1;
+        px = positionx;
+        py = positiony;
+      } else {
+        image(alien, positionx, positiony, 80, 80);
+        move(positionx, positiony + 160);
+      }
+    } else if (positiony == 260) {
+      if (positionx > 100) {
+        image(alien, positionx, positiony, 80, 80);
+        positionx -= 1;
+        px = positionx;
+        py = positiony;
+      } else {
+        image(alien, positionx, positiony, 80, 80);
+        move(positionx, positiony + 160);
+      }
+    } else if (positiony == 420) { 
+      if (positionx < 600) {
+        image(alien, positionx, positiony, 80, 80);
+        positionx += 1;
+        px = positionx;
+        py = positiony;
+        playerAlive = false;
+      }
     }
-  } else if (positiony == 260) {
-  if (positionx > 100) {
-    image(alien, positionx, positiony, 80, 80);
-    positionx -= 1;
-    px = positionx;
-    py = positiony;
-  } else {
-    image(alien, positionx, positiony, 80, 80);
-    move(positionx, positiony + 160);
   }
-} else if (positiony == 420) { 
-  if (positionx < 600) {
-    image(alien, positionx, positiony, 80, 80);
-    positionx += 1;
-    px = positionx;
-    py = positiony;
-    playerAlive = false;
+  
+  boolean isShot(){
+     return alive; 
   }
-
+  
+  void setS(boolean b){
+     alive = b; 
+  }
+  
+  
 }
-<<<<<<< HEAD
-}
 
-}
-
-
-
-=======
-
-
-
-
->>>>>>> 140a65e1456f7cbb6d9fe69e7ad5cde5c7ebe6e6

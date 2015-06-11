@@ -62,12 +62,12 @@ void Instructions() {
   image(instructions, 100, 30, 600, 550);
 }
 
-void Background(){
+void Background() {
   textSize(22);
   text("Score: "+player.getPoints(), 20, 50);
   text("Lives: "+player.getLives(), 580, 50);
-  for(int i = 0; i < player.getLives(); i++){
-     image(ship, 670 + i*45, 28, 30, 30);
+  for (int i = 0; i < player.getLives (); i++) {
+    image(ship, 670 + i*45, 28, 30, 30);
   }
 }
 
@@ -107,8 +107,7 @@ void displayGO() {
   text("game over", 400, 100);
 }
 
-void endGame(){
-
+void endGame() {
 }  
 
 void loadA() {
@@ -133,19 +132,18 @@ void loadA() {
 }
 
 
-void alienAttack(){
- for(aliens a: aliens_){
-  if(a.getPX() == player.getX() && rand.nextInt(100) > 95){
-    bullets.add(new Bullet(a.getPX()+25,a.getPY()+25,1,false));
-    println("ayyeyeey");
+void alienAttack() {
+  for (aliens a : aliens_) {
+    if (a.getPX() == player.getX() && rand.nextInt(100) > 95) {
+      bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
+      println("ayyeyeey");
+    }
   }
- }
-   
 }
 
 void play() {
   player.loadPlayer();
-  for(aliens a: aliens_){
+  for (aliens a : aliens_) {
     a.moveAlien();
     a.loadAlien();
   }
@@ -154,10 +152,16 @@ void play() {
     if (b.isFired()) {
       b.shoot();
       b.setY(7);
+      for (aliens a : aliens_) {
+        if (b.getX() >= a.getPX() && b.getX() <= a.getPX()+80 &&
+          b.getY() >= a.getPY() && b.getY() <= a.getPY()+80) {
+          a.setS(false);
+          println("plz shoot");
+        }
+      }
     }
   }
 }
-
 
 
 void mouseClicked() {
@@ -186,9 +190,9 @@ void keyPressed() {
   if (keyCode==32 && mode==2) {
     bullets.add(new Bullet(player.getX()+25));
   }
-  if(keyCode==82){
+  if (keyCode==82) {
     mode = 0;
     loadA();
   }
-
 }
+

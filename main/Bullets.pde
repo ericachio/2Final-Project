@@ -51,7 +51,7 @@ class Bullet {
       fired = false;
     }
   }
-
+  
   void setXY(int x, int y) {
     if (x >= 0 && x < 800) {
       xcor = x;
