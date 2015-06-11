@@ -4,11 +4,12 @@ class Bullet {
   int count;
   boolean fired;
   boolean player;
+  boolean hit;
 
   Bullet(int x, int y, int c, boolean p) {
-    if(p){
+    if (p) {
       ycor = 545;
-    }else{
+    } else {
       ycor = y;
     }
     xcor = x;
@@ -16,20 +17,30 @@ class Bullet {
     xcor = x;
     player = p;
     fired = true;
+    hit = false;
   }
-  
-  Bullet(int x){
-    this(x,545,1, true);
+
+  Bullet(int x) {
+    this(x, 545, 1, true);
   }
 
   void shoot() {
-    if (fired) {
+    if (fired && hit == false) {
       ellipse(xcor, ycor, 5, 10);
+    } else if (hit && fired){
+      setX(xcor);
+      setY(ycor);
+      println("X" + getX());
+      println("Y" + getY());
     }
   }
 
+  void setH(boolean h) {
+    hit = h;
+  }  
+
   int getX() {
-    return ycor;
+    return xcor;
   }
 
   void setX(int n) {
@@ -45,13 +56,13 @@ class Bullet {
   void setY(int n) {
     if (player && ycor - n >= 0) {
       ycor -= n;
-    }else if(!player && ycor + n <= 600){
+    } else if (!player && ycor + n <= 600) {
       ycor += n;
     } else {
       fired = false;
     }
   }
-  
+
   void setXY(int x, int y) {
     if (x >= 0 && x < 800) {
       xcor = x;
@@ -77,9 +88,9 @@ class Bullet {
 
   void setCount(int n) {
     count = n;
-      if (n<=0) {
+    if (n<=0) {
       fired = false;
     }
   }
-
 }
+

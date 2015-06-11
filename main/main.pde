@@ -147,16 +147,17 @@ void play() {
     a.moveAlien();
     a.loadAlien();
   }
-  alienAttack();
+  //alienAttack();
   for ( Bullet b : bullets) {
     if (b.isFired()) {
       b.shoot();
       b.setY(7);
       for (aliens a : aliens_) {
-        if (b.getX() >= a.getPX() && b.getX() <= a.getPX()+80 &&
-          b.getY() >= a.getPY() && b.getY() <= a.getPY()+80) {
+        if (b.getX() >= a.getPX() && b.getX() <= a.getPX()+40 &&
+          b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
           a.setS(false);
-          println("plz shoot");
+          b.setH(true);
+          println("shot" + b.getX());
         }
       }
     }

@@ -24,7 +24,11 @@ class aliens {
   }
 
   void loadAlien() {
-    image(alien, px, py, 40, 30);
+    if (alive == true) {
+      image(alien, px, py, 40, 30);
+    } else if (alive == false){
+      setPosition(0);
+    }
   }
 
   //  void loadRow(int positionx, int positiony) {
@@ -104,15 +108,13 @@ class aliens {
       }
     }
   }
-  
-  boolean isShot(){
-     return alive; 
+
+  boolean isShot() {
+    return alive;
   }
-  
-  void setS(boolean b){
-     alive = b; 
+
+  void setS(boolean b) {
+    alive = b;
   }
-  
-  
 }
 
