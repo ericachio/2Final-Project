@@ -101,10 +101,18 @@ class aliens {
     py = positiony;
     playerAlive = false;
   }
-}
-}
 
 }
+<<<<<<< HEAD
+}
+
+}
 
 
 
+=======
+
+
+
+
+>>>>>>> 140a65e1456f7cbb6d9fe69e7ad5cde5c7ebe6e6
