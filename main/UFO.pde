@@ -5,8 +5,14 @@ class UFO{
   
   PImage ship = loadImage("ufo.png");
   
+  Ufo(){
+    xcor = 0;
+    ycor = 80;
+    alive = true;
+  }
+      
     
-  void loadAlien() {
+  void loadUFO() {
     if (alive == true) {
       image(ship, px, py, 40, 30);
     } else if (alive == false){
