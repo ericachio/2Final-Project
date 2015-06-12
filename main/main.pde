@@ -147,7 +147,7 @@ void play() {
     a.moveAlien();
     a.loadAlien();
   }
-  //alienAttack();
+  alienAttack();
   for ( Bullet b : bullets) {
     if (b.isFired()) {
       b.shoot();
@@ -157,7 +157,8 @@ void play() {
           b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
           a.setS(false);
           b.setH(true);
-          println("shot" + b.getX());
+          player.setPoints(player.getPoints() + 10);
+          //println("shot" + b.getX());
         }
       }
     }
