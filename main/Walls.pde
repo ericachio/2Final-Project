@@ -22,6 +22,8 @@ class Walls {
     ysize -= 2;
     if (hp == 0 || ysize <= 0) {
       alive = false;
+      xcor = 0;
+      ycor = 0;
     } else {
       rect(xcor, ycor, 80, ysize);
     }

@@ -67,7 +67,7 @@ void Instructions() {
 
 void Background() {
   textSize(22);
-  text("Score: "+player.getPoints(), 20, 50);
+  text("Score: "+player.getPoints(), 50, 50);
   text("Lives: "+player.getLives(), 580, 50);
   text("Level: "+level, 300, 50);
   for (int i = 0; i < player.getLives (); i++) {
@@ -151,7 +151,7 @@ void loadW() {
 
 void alienAttack() {
   for (aliens a : aliens_) {
-    if (a.getPX() == player.getX() && rand.nextInt(100) > 50) {
+    if (a.getPX() == player.getX() && rand.nextInt(100) > (100 - (level * 10))) {
       bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
       println("ayyeyeey");
     }
@@ -218,6 +218,7 @@ void mouseClicked() {
     mode = 2;
   } else if (mouseX >= 290 && mouseX <= 515 &&
     mouseY >= 160 && mouseY <= 210 && mode == 3) {
+    setup();
     mode = 2;
   }
 }
