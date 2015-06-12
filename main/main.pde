@@ -146,7 +146,7 @@ void loadW() {
 
 void alienAttack() {
   for (aliens a : aliens_) {
-    if (a.getPX() == player.getX() && rand.nextInt(100) > 95) {
+    if (a.getPX() == player.getX() && rand.nextInt(100) > 50) {
       bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
       println("ayyeyeey");
     }
@@ -162,7 +162,7 @@ void play() {
   for (Walls w : walls_) {
     w.loadWall();
   }
-  alienAttack();
+  alienAttack(); //bug: can kill its commrades
   for ( Bullet b : bullets) {
     if (b.isFired()) {
       b.shoot();
@@ -174,6 +174,23 @@ void play() {
           b.setH(true);
           player.setPoints(player.getPoints() + 10);
           //println("shot" + b.getX());
+        }
+      }
+      for (Walls w : walls_) {
+        if (b.getX() >= w.getX() && b.getX() <= w.getX()+80 &&
+          b.getY() >= w.getY() && b.getY() <= w.getY()+20) {
+          b.setH(true);
+          w.decHP();
+          player.setPoints(player.getPoints() + 10);
+          //println("shot" + b.getX());
+        }
+      }
+      if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&
+        b.getY() >= player.getY() && b.getY() <= player.getY()+40) {
+        b.setH(true);
+        player.decHealth();
+        if (player.alive == false){
+          mode = 3;
         }
       }
     }

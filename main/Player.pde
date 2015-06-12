@@ -1,4 +1,4 @@
-class Player{
+class Player {
 
   PImage ship;
 
@@ -8,7 +8,7 @@ class Player{
   int lives;
   int level;
   int xcor, ycor;
-
+  boolean alive;
 
   Player() {
     health = 200;
@@ -18,6 +18,7 @@ class Player{
     level = 1;
     xcor = 380;
     ycor = 550;
+    alive = true;
   }
 
   void loadPlayer() {
@@ -30,8 +31,16 @@ class Player{
     return health;
   }
 
-  void setHealth(int n) {
-    health = n;
+  void decHealth() {
+    health = health - 100;
+    println("health" + health);
+    if (health <= 0) {
+      if (getLives() == 0) {
+        alive = false;
+      }
+      setLives(getLives() - 1);
+      health = 200;
+    }
   }
 
   int getPoints() {
