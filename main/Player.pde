@@ -11,7 +11,7 @@ class Player {
   boolean alive;
 
   Player() {
-    health = 200;
+    health = 300;
     points = 0;
     coins = 0;
     lives = 3;

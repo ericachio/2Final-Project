@@ -1,6 +1,8 @@
 class aliens {
 
-  PImage alien = loadImage("alien.jpg");
+  PImage alien1 = loadImage("alien1.png");
+  PImage alien2 = loadImage("alien2.png");
+  PImage alien3 = loadImage("alien3.png");
 
   int alienHP;
   int px, py;
@@ -25,7 +27,13 @@ class aliens {
 
   void loadAlien() {
     if (alive == true) {
-      image(alien, px, py, 40, 30);
+      if (level == 1){
+         image(alien1, px, py, 40, 30); 
+      }else if (level == 2){
+        image(alien2, px, py, 40, 30); 
+      }else if (level == 3){
+        image(alien3, px, py, 40, 30); 
+      }
     } else if (alive == false){
       setPosition(0);
     }
@@ -67,7 +75,7 @@ class aliens {
     }
   }  
 
-
+/*
   //will be a recursive to move alien across the screen
   void move(int positionx, int positiony) {
     if (positiony == 100) {
@@ -109,7 +117,7 @@ class aliens {
       }
     }
   }
-
+*/
   boolean isShot() {
     return alive;
   }

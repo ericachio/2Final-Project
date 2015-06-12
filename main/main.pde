@@ -3,7 +3,7 @@ import java.util.*;
 //plz work
 int mode; //mode 0 is the menu & 1 is instructions
 int count = 5;
-PImage arrow, menu, instructions, alien, ship;
+PImage arrow, menu, instructions, alien1, alien2, alien3, ship;
 boolean fired = false;
 Player player;
 int level;
@@ -21,7 +21,9 @@ void setup() {
   mode = 0;
   arrow = loadImage("arrowkeys.jpg");
   menu = loadImage("menu.png");
-  alien = loadImage("alien.jpg");
+  alien1 = loadImage("alien1.png");
+  alien2 = loadImage("alien2.png");
+  alien3 = loadImage("alien3.png");
   ship = loadImage("ship.png");
   instructions = loadImage("instructions.png");
   player = new Player();
@@ -123,19 +125,19 @@ void loadA() {
   int x = 100;
   int y = 100;
   for (int i = 0; i < 10; i++) {
-    aliens_[i] = new aliens(x, y, level);
+    aliens_[i] = new aliens(x, y, 3);
     x+=60;
   }
   x = 100;
   y = 180;
   for (int i = 10; i < 20; i++) {
-    aliens_[i] = new aliens(x, y, level);
+    aliens_[i] = new aliens(x, y, 2);
     x+= 60;
   }  
   x = 100;
   y = 260;
   for (int i = 20; i < 30; i++) {
-    aliens_[i] = new aliens(x, y, level);
+    aliens_[i] = new aliens(x, y, 1);
     x+=60;
   }
 }
