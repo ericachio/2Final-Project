@@ -132,10 +132,10 @@ void loadA() {
   }
 }
 
-void loadW(){
+void loadW() {
   int j = 100;
-  for(int i = 0; i < 4; i++){
-    w = new Walls(j, 500);
+  for (int i = 0; i < 4; i++) {
+    walls_[i] = new Walls(j, 500);
     j+=200;
   }
 }
@@ -156,7 +156,7 @@ void play() {
     a.moveAlien();
     a.loadAlien();
   }
-  for(Walls w: walls_){
+  for (Walls w : walls_) {
     w.loadWall();
   }
   alienAttack();
@@ -210,7 +210,3 @@ void keyPressed() {
   }
 }
 
-<<<<<<< HEAD
-=======
-}
->>>>>>> 6ee885b507c293e41f153add88e81ae15f954f06
