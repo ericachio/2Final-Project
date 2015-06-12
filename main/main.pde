@@ -89,7 +89,7 @@ void displayMenu() {
   //start button
   rect(290, 160, 225, 50);
   fill(0);
-  text("Play Game", 400, 200);
+  text("Play Again", 400, 200);
   fill(225);
 }
 
@@ -109,6 +109,11 @@ void displayGO() {
   textSize(64);
   textAlign(CENTER);
   text("game over", 400, 100);
+  textSize(36);
+  rect(290, 160, 225, 50);
+  fill(0);
+  text("Play Game", 400, 200);
+  fill(225);
 }
 
 void endGame() {
@@ -177,14 +182,14 @@ void play() {
             //println("shot" + b.getX());
           }
         }
-        for (Walls w : walls_) {
-          if (b.getX() >= w.getX() && b.getX() <= w.getX()+80 &&
-            b.getY() >= w.getY() && b.getY() <= w.getY()+20) {
-            b.setH(true);
-            w.decHP();
-            player.setPoints(player.getPoints() + 10);
-            //println("shot" + b.getX());
-          }
+      }
+      for (Walls w : walls_) {
+        if (b.getX() >= w.getX() && b.getX() <= w.getX()+80 &&
+          b.getY() >= w.getY() && b.getY() <= w.getY()+20) {
+          b.setH(true);
+          w.decHP();
+          player.setPoints(player.getPoints() + 10);
+          //println("shot" + b.getX());
         }
       }
       if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&
@@ -210,6 +215,9 @@ void mouseClicked() {
     mode = 2; //play
   } else if (mouseX >= 346 && mouseX <= 455 &&
     mouseY >= 484 && mouseY <= 505 && mode == 1) {
+    mode = 2;
+  } else if (mouseX >= 290 && mouseX <= 515 &&
+    mouseY >= 160 && mouseY <= 210 && mode == 3) {
     mode = 2;
   }
 }

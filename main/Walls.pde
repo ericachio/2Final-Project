@@ -1,37 +1,42 @@
-class Walls{
-  
+class Walls {
+
   int hp;
   int xcor, ycor;
   boolean alive;
-  
-  Walls(int x, int y){
+  int ysize;
+
+  Walls(int x, int y) {
     hp = 10;
     alive = true;
     xcor = x;
     ycor = y;
+    ysize = 20;
   }
-  
-  int getHP(){
+
+  int getHP() {
     return hp;
   }
-  
-  void decHP(){
+
+  void decHP() {
     hp-=1;
-    if(hp == 0){
+    ysize -= 2;
+    if (hp == 0 || ysize <= 0) {
       alive = false;
+    } else {
+      rect(xcor, ycor, 80, ysize);
     }
   }
-  
-  boolean status(){
+
+  boolean status() {
     return alive;
   }
-  
+
   int getX() {
     return xcor;
   }
 
   void setX(int n) {
-      xcor = n;
+    xcor = n;
   }
 
   int getY() {
@@ -39,19 +44,14 @@ class Walls{
   }
 
   void setY(int n) {
-      ycor = n;
+    ycor = n;
   }
-  
-  void loadWall(){
-    if(alive){
-      rect(xcor,ycor,80,20);
+
+  void loadWall() {
+    if (alive) {
+      rect(xcor, ycor, 80, ysize);
       fill(80);
     }
   }
-  
-      
-  
 }
-  
-  
-  
+
