@@ -67,6 +67,7 @@ class aliens {
     }
   }  
 
+<<<<<<< HEAD
   //will be a recursive to move alien across the screen
   void move(int positionx, int positiony) {
     if (positiony == 100) {
@@ -118,3 +119,13 @@ class aliens {
   }
 }
 
+=======
+}
+
+
+
+
+
+
+
+>>>>>>> 6ee885b507c293e41f153add88e81ae15f954f06
