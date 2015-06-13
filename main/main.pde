@@ -72,6 +72,9 @@ void play() {
   for (aliens a : aliens_) {
     a.moveAlien();
     a.loadAlien();
+    if(a.getPY()>500){
+      mode = 3;
+    }
   }
   for (Walls w : walls_) {
     w.loadWall();
@@ -278,3 +281,4 @@ void keyPressed() {
     loadA();
   }
 }
+
