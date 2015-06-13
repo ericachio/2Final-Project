@@ -6,6 +6,7 @@ int count = 5;
 PImage arrow, menu, instructions, alien1, alien2, alien3, ship;
 boolean fired;
 Player player;
+UFO oof;
 int level;
 
 List<Bullet> bullets = new ArrayList<Bullet>();
@@ -27,6 +28,7 @@ void setup() {
   ship = loadImage("ship.png");
   instructions = loadImage("instructions.png");
   player = new Player();
+  oof = new UFO();
   loadA();
   loadW();
   level = 1;
@@ -57,6 +59,25 @@ void draw() {
   if (mode == 3) {
     displayGO();
   }
+}
+
+void play() {
+  player.loadPlayer();
+  player.mode();
+  if (!oof.alive && rand.nextInt(1000) == 1) {
+    oof = new UFO(rand.nextInt(1000)%2==0);
+  }
+  oof.move();
+  oof.load();
+  for (aliens a : aliens_) {
+    a.moveAlien();
+    a.loadAlien();
+  }
+  for (Walls w : walls_) {
+    w.loadWall();
+  }
+  alienAttack();
+  collision();
 }
 
 void Menu() {
@@ -156,10 +177,9 @@ void loadW() {
   }
 }
 
-
 void alienAttack() {
   for (aliens a : aliens_) {
-    if(rand.nextInt(100000) == 1){
+    if (rand.nextInt(100000) == 1) {
       bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
     }
     if (a.getPX() == player.getX() && rand.nextInt(100) > 90) {
@@ -169,22 +189,18 @@ void alienAttack() {
   }
 }
 
-void play() {
-  player.loadPlayer();
-  player.mode();
-  for (aliens a : aliens_) {
-    a.moveAlien();
-    a.loadAlien();
-  }
-  for (Walls w : walls_) {
-    w.loadWall();
-  }
-  alienAttack();
+void collision() {
   for ( Bullet b : bullets) {
     if (b.isFired()) {
       b.shoot();
       b.setY(7);
-      if (b.player == true) {
+      if (b.player) {
+        if (b.getX() >= oof.getX() && b.getX() <= oof.getX()+40 &&
+          b.getY() >= oof.getY() && b.getY() <= oof.getY()+30) {
+          oof.setS(false);
+          b.setH(true);
+          player.setPoints(player.getPoints()+100);
+        }
         for (aliens a : aliens_) {
           if (b.getX() >= a.getPX() && b.getX() <= a.getPX()+40 &&
             b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
@@ -214,6 +230,7 @@ void play() {
     }
   }
 }
+
 
 
 void mouseClicked() {
