@@ -4,12 +4,12 @@ import java.util.*;
 int mode; //mode 0 is the menu & 1 is instructions
 int count = 5;
 PImage arrow, menu, instructions, alien1, alien2, alien3, ship;
-boolean fired = false;
+boolean fired;
 Player player;
 int level;
 
 List<Bullet> bullets = new ArrayList<Bullet>();
-aliens[] aliens_ = new aliens[30];
+aliens[] aliens_ = new aliens[40];
 Walls[] walls_ = new Walls[4];
 
 Random rand = new Random();
@@ -70,8 +70,8 @@ void Instructions() {
 void Background() {
   textSize(22);
   text("Score: "+player.getPoints(), 50, 50);
-  text("Lives: "+player.getLives(), 580, 50);
-  text("Level: "+level, 300, 50);
+  text("Lives: ", 580, 50);
+  text("Player Level: "+player.level, 300, 50);
   for (int i = 0; i < player.getLives (); i++) {
     image(ship, 670 + i*45, 28, 30, 30);
   }
@@ -129,14 +129,20 @@ void loadA() {
     x+=60;
   }
   x = 100;
-  y = 180;
+  y = 160;
   for (int i = 10; i < 20; i++) {
     aliens_[i] = new aliens(x, y, 2);
     x+= 60;
   }  
   x = 100;
-  y = 260;
+  y = 220;
   for (int i = 20; i < 30; i++) {
+    aliens_[i] = new aliens(x, y, 1);
+    x+=60;
+  }
+  x = 100;
+  y = 280;
+  for (int i = 30; i < 40; i++) {
     aliens_[i] = new aliens(x, y, 1);
     x+=60;
   }
@@ -153,15 +159,19 @@ void loadW() {
 
 void alienAttack() {
   for (aliens a : aliens_) {
-    if (a.getPX() == player.getX() && rand.nextInt(100) > (100 - (level * 10))) {
+    if(rand.nextInt(100000) == 1){
       bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
-      println("ayyeyeey");
+    }
+    if (a.getPX() == player.getX() && rand.nextInt(100) > 90) {
+      bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
+      //println("ayyeyeey");
     }
   }
 }
 
 void play() {
   player.loadPlayer();
+  player.mode();
   for (aliens a : aliens_) {
     a.moveAlien();
     a.loadAlien();
@@ -180,7 +190,7 @@ void play() {
             b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
             a.setS(false);
             b.setH(true);
-            player.setPoints(player.getPoints() + 10);
+            player.setPoints(player.getPoints() + a.level * 10);
             //println("shot" + b.getX());
           }
         }
@@ -190,14 +200,13 @@ void play() {
           b.getY() >= w.getY() && b.getY() <= w.getY()+20) {
           b.setH(true);
           w.decHP();
-          player.setPoints(player.getPoints() + 10);
           //println("shot" + b.getX());
         }
       }
       if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&
         b.getY() >= player.getY() && b.getY() <= player.getY()+40) {
         b.setH(true);
-        player.decHealth();
+        player.decLives();
         if (player.alive == false) {
           mode = 3;
         }
@@ -235,11 +244,20 @@ void keyPressed() {
   }
 
   if (keyCode==32 && mode==2) {
-    bullets.add(new Bullet(player.getX()+25));
+    fired = false;
+    for (Bullet b : bullets) {
+      if (b.player) {
+        if (b.fired) {
+          fired = true;
+        }
+      }
+    }
+    if (!fired) {
+      bullets.add(new Bullet(player.getX()+25));
+    }
   }
   if (keyCode==82) {
     mode = 0;
     loadA();
   }
 }
-

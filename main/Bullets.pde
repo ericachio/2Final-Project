@@ -25,13 +25,11 @@ class Bullet {
   }
 
   void shoot() {
-    if (fired && hit == false) {
+    if (fired && !hit) {
       ellipse(xcor, ycor, 5, 10);
-    } else if (hit && fired){
-      setX(xcor);
-      setY(ycor);
-      println("X" + getX());
-      println("Y" + getY());
+    } else {
+      xcor = 0;
+      ycor = 0;
     }
   }
 
@@ -58,7 +56,8 @@ class Bullet {
       ycor -= n;
     } else if (!player && ycor + n <= 600) {
       ycor += n;
-    } else {
+    }
+    if (ycor <= 20) {
       fired = false;
     }
   }

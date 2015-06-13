@@ -21,6 +21,18 @@ class Player {
     alive = true;
   }
 
+  void mode() {
+    if (points >= 100 && points < 200) {
+      level = 2;
+    } else if (points >= 200 && points < 300) {
+      level = 3;
+    } else if (points >= 300 && points < 400) {
+      level = 4;
+    } else if (points >= 400) {
+      level = 5;
+    }
+  }
+
   void loadPlayer() {
     ship = loadImage("ship.png");
     image(ship, xcor, ycor, 50, 40);
@@ -29,6 +41,14 @@ class Player {
 
   int getHealth() {
     return health;
+  }
+
+
+  void decLives() {
+    lives--;
+    if (lives < 0) {
+      alive = false;
+    }
   }
 
   void decHealth() {
@@ -95,4 +115,5 @@ class Player {
     }
   }
 }
+
 

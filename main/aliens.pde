@@ -27,14 +27,14 @@ class aliens {
 
   void loadAlien() {
     if (alive == true) {
-      if (level == 1){
-         image(alien1, px, py, 40, 30); 
-      }else if (level == 2){
-        image(alien2, px, py, 40, 30); 
-      }else if (level == 3){
-        image(alien3, px, py, 40, 30); 
+      if (level == 1) {
+        image(alien1, px, py, 40, 30);
+      } else if (level == 2) {
+        image(alien2, px, py, 40, 30);
+      } else if (level == 3) {
+        image(alien3, px, py, 40, 30);
       }
-    } else if (alive == false){
+    } else if (alive == false) {
       setPosition(0);
     }
   }
@@ -75,49 +75,6 @@ class aliens {
     }
   }  
 
-/*
-  //will be a recursive to move alien across the screen
-  void move(int positionx, int positiony) {
-    if (positiony == 100) {
-      if (positionx < 600) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx += 1;
-        px = positionx;
-        py = positiony;
-        playerAlive = true;
-      } //else {
-      //image(alien, positionx, positiony, 80, 80);
-      //move(positionx, positiony);
-      else if (positionx > 100) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx -= 1;
-        px = positionx;
-        py = positiony;
-      } else {
-        image(alien, positionx, positiony, 80, 80);
-        move(positionx, positiony + 160);
-      }
-    } else if (positiony == 260) {
-      if (positionx > 100) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx -= 1;
-        px = positionx;
-        py = positiony;
-      } else {
-        image(alien, positionx, positiony, 80, 80);
-        move(positionx, positiony + 160);
-      }
-    } else if (positiony == 420) { 
-      if (positionx < 600) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx += 1;
-        px = positionx;
-        py = positiony;
-        playerAlive = false;
-      }
-    }
-  }
-*/
   boolean isShot() {
     return alive;
   }
@@ -126,5 +83,3 @@ class aliens {
     alive = b;
   }
 }
-
-

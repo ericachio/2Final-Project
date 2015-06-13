@@ -6,8 +6,8 @@ class UFO {
   PImage ship = loadImage("ufo.png");
 
 
-  void Ufo() {
-    xcor = 0;
+  void Ufo(int x) {
+    xcor = x;
     ycor = 80;
     alive = true;
   }
@@ -16,13 +16,7 @@ class UFO {
   void loadUFO() {
     if (alive == true) {
       image(ship, xcor, ycor, 40, 30);
-    } else if (alive == false) {
-      setPosition(0);
     }
-  }
-  
-  void setPosition(int x){
-     xcor = x; 
   }
 
   void move() {
