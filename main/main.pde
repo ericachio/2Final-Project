@@ -64,15 +64,15 @@ void draw() {
 void play() {
   player.loadPlayer();
   player.mode();
-  if (!oof.alive && rand.nextInt(1000) == 1) {
-    oof = new UFO(rand.nextInt(1000)%2==0);
+  if (!oof.alive && rand.nextInt(1500) == 1) {
+    oof = new UFO(rand.nextInt(1)==0);
   }
   oof.move();
   oof.load();
   for (aliens a : aliens_) {
     a.moveAlien();
     a.loadAlien();
-    if(a.getPY()>500){
+    if (a.getPY()>500) {
       mode = 3;
     }
   }
@@ -93,7 +93,7 @@ void Instructions() {
 
 void Background() {
   textSize(22);
-  text("Score: "+player.getPoints(), 50, 50);
+  text("Score: "+player.points, 50, 50);
   text("Lives: ", 580, 50);
   text("Player Level: "+player.level, 300, 50);
   for (int i = 0; i < player.getLives (); i++) {
@@ -138,12 +138,9 @@ void displayGO() {
   textSize(36);
   rect(290, 160, 225, 50);
   fill(0);
-  text("Play Game", 400, 200);
+  text("Play Again", 400, 200);
   fill(225);
 }
-
-void endGame() {
-}  
 
 void loadA() {
   int x = 100;
@@ -165,11 +162,11 @@ void loadA() {
     x+=60;
   }
   x = 100;
-  y = 280;
-  for (int i = 30; i < 40; i++) {
-    aliens_[i] = new aliens(x, y, 1);
-    x+=60;
-  }
+   y = 280;
+   for (int i = 30; i < 40; i++) {
+   aliens_[i] = new aliens(x, y, 1);
+   x+=60;
+   }
 }
 
 void loadW() {
@@ -197,19 +194,23 @@ void collision() {
     if (b.isFired()) {
       b.shoot();
       b.setY(7);
-      if (b.player) {
+      if (b.player && oof.status()) {
         if (b.getX() >= oof.getX() && b.getX() <= oof.getX()+40 &&
           b.getY() >= oof.getY() && b.getY() <= oof.getY()+30) {
-          oof.setS(false);
+          oof.die();
           b.setH(true);
-          player.setPoints(player.getPoints()+100);
+          player.incPoints(100);
         }
-        for (aliens a : aliens_) {
+      }
+      for (aliens a : aliens_) {
+        if (b.player) {
           if (b.getX() >= a.getPX() && b.getX() <= a.getPX()+40 &&
             b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
             a.setS(false);
             b.setH(true);
-            player.setPoints(player.getPoints() + a.level * 10);
+            player.incPoints(a.level * 10);
+            println("alevel "+a.level);
+            println("score "+player.points); 
             //println("shot" + b.getX());
           }
         }
@@ -250,6 +251,7 @@ void mouseClicked() {
   } else if (mouseX >= 290 && mouseX <= 515 &&
     mouseY >= 160 && mouseY <= 210 && mode == 3) {
     setup();
+
     mode = 2;
   }
 }
@@ -273,7 +275,16 @@ void keyPressed() {
       }
     }
     if (!fired) {
-      bullets.add(new Bullet(player.getX()+25));
+      if (player.level == 1) {
+        bullets.add(new Bullet(player.getX()+25));
+      } else if (player.level == 2) {
+        bullets.add(new Bullet(player.getX()+25, player.getY()-40));
+        bullets.add(new Bullet(player.getX()+25, player.getY()));
+      } else if (player.level > 2) {
+        bullets.add(new Bullet(player.getX()+5));
+        bullets.add(new Bullet(player.getX()+25, player.getY()-20));
+        bullets.add(new Bullet(player.getX()+45));
+      }
     }
   }
   if (keyCode==82) {

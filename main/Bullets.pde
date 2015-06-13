@@ -23,6 +23,14 @@ class Bullet {
   Bullet(int x) {
     this(x, 545, 1, true);
   }
+  
+  Bullet(int x, int y){
+    xcor = x;
+    ycor = y;
+    player = true;
+    fired = true;
+    hit = false;
+  }
 
   void shoot() {
     if (fired && !hit) {
