@@ -38,6 +38,24 @@ fixed menu and instructions page
 added more aliens
 fixed alien movement
 
+6/9/15
+aliens can shoot
+
+6/10/15
+aliens and player can kill each other
+score counter works
+
+6/11/15
+added walls
+walls decrease in size when shot
+
+6/12/15
+added different aliens
+starting sprites
+
+2/13/15
+can only shoot one bullet at a time
+added different levels
 
 GOALS:
 menu and instructions page x
@@ -47,13 +65,12 @@ bullet class x
 set up player and aliens x
 player and alien movement x
 player shooting function x
-alien shooting function
-track score, lives, levels, and coins
-game over page
+alien shooting function x
+track score, lives, and levels x
+walls x
+game over page 
 red ufo thing
-make harder levels --> faster aliens and whatnot 
-add upgrades to player/ship --> laser bullet thing
-walls
+add upgrades to player/ship --> laser bullet thing??
 add sound effects and music
 
 
