@@ -390,6 +390,9 @@ void mouseClicked() {
   } else if (mouseX >= 300 && mouseX <= 500 && 
     mouseY >= 440 && mouseY <= 490 && mode == 3) {
     setup();
+  } else if (mouseX >= 300 && mouseX <= 500 && 
+    mouseY >= 440 && mouseY <= 490 && mode == 5) {
+    setup();
   }
 }
 
@@ -434,6 +437,9 @@ void keyPressed() {
   if (keyCode == 79) {
     setup();
     mode = 4;
+    player.lives++;
+  }
+  if(keyCode == 87){
     player.lives++;
   }
 }
