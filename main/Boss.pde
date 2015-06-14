@@ -26,7 +26,6 @@ class Boss {
     }
   }
 
-
   void move() {  
     if (direction) {
       xcor+=2;
@@ -39,6 +38,13 @@ class Boss {
       steps = 200;
     }
   }  
+  
+  void displayHP(){
+    if (alive) {
+      fill(225,0,0);
+      rect(50, 80, hp * .35, 20);
+    }
+  }
 
   void decHP() {
     hp-=10;

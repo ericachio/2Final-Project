@@ -48,14 +48,15 @@ void draw() {
   }
   if (mode == 2) {
     Background();
+    fill(100);
     play();
   }
   if (mode == 3) {
     GameOver();
   }
   if (mode == 4) {
-    fill(255);
     Background();
+    fill(100);
     bosslevel();
   }
 }
@@ -91,13 +92,18 @@ void bosslevel() {
   player.mode();
   bAlien.move();
   bAlien.loadAlien();
+  bAlien.displayHP();
+  for (Walls w : walls_) {
+    fill(0,225,0);
+    w.loadWall();
+  }
   for ( Bullet b : bullets) {
     if (b.isFired()) {
       b.shoot();
       b.setY(7);
     }
   }
-  if (rand.nextInt(100) > 97) {
+  if (rand.nextInt(100) > 98 && bAlien.alive) {
     attack();
   }
   collide();
@@ -152,9 +158,13 @@ void GameOver() {
 }
 
 void Background() {
+ fill(255,255,255);
   textSize(22);
+  textAlign(LEFT);
   text("Score: "+player.points, 50, 50);
+  textAlign(RIGHT);
   text("Lives: ", 600, 50);
+  textAlign(CENTER);
   text("Player Level: "+player.level, 300, 50);
   for (int i = 0; i < player.getLives (); i++) {
     image(ship, 630 + i*45, 28, 30, 20);
@@ -252,9 +262,9 @@ void alienAttack() {
 }
 
 void attack() {
-  bullets.add(new Bullet(bAlien.xcor+130, bAlien.ycor+150, 1, false));
+  bullets.add(new Bullet(bAlien.xcor+80, bAlien.ycor+150, 1, false));
   bullets.add(new Bullet(bAlien.xcor+150, bAlien.ycor+170, 1, false));
-  bullets.add(new Bullet(bAlien.xcor+170, bAlien.ycor+150, 1, false));
+  bullets.add(new Bullet(bAlien.xcor+220, bAlien.ycor+150, 1, false));
 }
 
 
@@ -272,14 +282,21 @@ void collide() {
     } else if (bAlien.alive && !b.player) {
       println(b.getX());
       if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&
-        b.getY() >= player.getY() && b.getY() <= player.getY()+50
-        ) {
+        b.getY() >= player.getY() && b.getY() <= player.getY()+40) {
         println("ay");
         b.setH(true);
         player.decLives();
-        if (player.alive == false) {
+        if (!player.alive) {
           mode = 3;
         }
+      }
+    }
+    for (Walls w : walls_) {
+      if (b.getX() >= w.getX() && b.getX() <= w.getX()+80 &&
+        b.getY() >= w.getY() && b.getY() <= w.getY()+20) {
+        b.setH(true);
+        w.decHP();
+        println("shot" + b.getX());
       }
     }
   }
