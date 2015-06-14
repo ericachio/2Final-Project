@@ -79,22 +79,19 @@ void play() {
     a.loadAlien();
     a.action();
     a.moveAlien();
-    if (a.getPY()>500) {
-
-      if (a.alive && a.getPY()>500) {
-        mode = 3;
-      }
+    if (a.alive && a.getPY()>500) {
+      mode = 3;
     }
     for (Walls w : walls_) {
       w.loadWall();
     }
-    alienAttack();
-    collision();
-    if (count == 0) {
-      bullets = new ArrayList<Bullet>();
-      mode = 4;
-      player.lives++;
-    }
+  }
+  alienAttack();
+  collision();
+  if (count == 0) {
+    bullets = new ArrayList<Bullet>();
+    mode = 4;
+    player.lives++;
   }
 }
 
