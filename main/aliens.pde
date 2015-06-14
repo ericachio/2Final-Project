@@ -3,8 +3,8 @@ class aliens {
   PImage alien1 = loadImage("alien1.png");
   PImage alien2 = loadImage("alien2.png");
   PImage alien3 = loadImage("alien3.png");
-  PImage[] alien;
-  int step;
+  PImage[] alien = new PImage[2];
+  int step = 0;
   int x;
 
   int HP;
@@ -30,34 +30,32 @@ class aliens {
 
   void loadAlien() {
     x = 0;
-    alien = new PImage[2];
     if (alive) {
       if (level == 1) {
         for (int n = 0; n < 2; n++) {
           alien[n] = alien1.get(x, 0, 115, 80);
-          x+=115;
+          x = 115;
         }
       } else if (level == 2) {
         for (int n = 0; n < 2; n++) {
           alien[n] = alien2.get(x, 0, 105, 80);
-          x+=105;
+          x = 105;
         }
       } else if (level == 3) {
         for (int n = 0; n < 2; n++) {
           alien[n] = alien3.get(x, 0, 90, 80);
-          x+=90;
+          x = 90;
         }
       }
     } else {
-      px = 0;
+      px = 800;
     }
   }
 
   void action() {
-    step = 0;
-    image(alien[step], px, py, 40, 30);
-    step++;
-    if (step >= alien.length -1) {
+    image(alien[step], px, py, 40, 30); 
+    step ++;
+    if (step == alien.length - 1) {
       step = 0;
     }
   }
