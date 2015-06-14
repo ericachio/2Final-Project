@@ -34,6 +34,7 @@ class Bullet {
 
   void shoot() {
     if (fired && !hit) {
+      fill(255,255,255);
       ellipse(xcor, ycor, 5, 10);
     } else {
       xcor = 0;
