@@ -1,12 +1,13 @@
 import java.util.*;
 
 //plz work
-int mode; //mode 0 is the menu & 1 is instructions
-int count = 40;
+int mode; //mode 0 is the menu & 1 is uctions
+int count;
 int level;
 PImage menu, instructions, end, arrow, alien1, alien2, alien3, ship;
 boolean fired;
 Player player;
+Boss balien;
 UFO oof;
 
 List<Bullet> bullets = new ArrayList<Bullet>();
@@ -20,6 +21,7 @@ void setup() {
   size(800, 600);
   background(0, 0, 0);
   mode = 0;
+  count = 40;
   menu = loadImage("menu.png");
   instructions = loadImage("instructions.png");
   end = loadImage("gameover2.png");
@@ -29,6 +31,7 @@ void setup() {
   ship = loadImage("ship.png");
   arrow = loadImage("arrowkeys.jpg");
   player = new Player();
+  balien = new Boss();
   oof = new UFO();
   loadA();
   loadW();
@@ -51,6 +54,8 @@ void draw() {
     GameOver();
   }
   if (mode == 4) {
+    player.lives++;
+    Background();
     bosslevel();
   }
 }
@@ -77,6 +82,19 @@ void play() {
   collision();
   if (count == 0) {
     mode = 4;
+  }
+}
+
+void bosslevel() {
+  player.loadPlayer();
+  player.mode();
+  balien.move();
+  balien.loadAlien();
+  for ( Bullet b : bullets) {
+    if (b.isFired()) {
+      b.shoot();
+      b.setY(7);
+    }
   }
 }
 
@@ -128,16 +146,13 @@ void GameOver() {
   text("Play Again?", 400, 480);
 }
 
-void bosslevel() {
-}
-
 void Background() {
   textSize(22);
   text("Score: "+player.points, 50, 50);
-  text("Lives: ", 580, 50);
+  text("Lives: ", 600, 50);
   text("Player Level: "+player.level, 300, 50);
   for (int i = 0; i < player.getLives (); i++) {
-    image(ship, 670 + i*45, 28, 30, 30);
+    image(ship, 630 + i*45, 28, 30, 20);
   }
 }
 
@@ -219,12 +234,14 @@ void loadW() {
 
 void alienAttack() {
   for (aliens a : aliens_) {
-    if (rand.nextInt(100000) == 1) {
-      bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
-    }
-    if (a.getPX() == player.getX() && rand.nextInt(100) > 90) {
-      bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
-      //println("ayyeyeey");
+    if (a.alive) {
+      if (rand.nextInt(100000) == 1) {
+        bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
+      }
+      if (a.getPX() == player.getX() && rand.nextInt(100) > 90) {
+        bullets.add(new Bullet(a.getPX()+25, a.getPY()+25, 1, false));
+        //println("ayyeyeey");
+      }
     }
   }
 }
@@ -243,7 +260,7 @@ void collision() {
         //println("oops");
       }
       for (aliens a : aliens_) {
-        if (b.player) {
+        if (a.alive && b.player) {
           if (b.getX() >= a.getPX() && b.getX() <= a.getPX()+40 &&
             b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
             a.setS(false);
@@ -297,10 +314,10 @@ void mouseClicked() {
 
 void keyPressed() {
   println(keyCode);
-  if (keyCode==37 && mode==2) {
+  if (keyCode==37 && (mode==2 || mode == 4)) {
     player.setX(player.getX()-20);
   }
-  if (keyCode==39 && mode==2) {
+  if (keyCode==39 && (mode==2 || mode == 4)) {
     player.setX(player.getX()+20);
   }
 
@@ -326,9 +343,15 @@ void keyPressed() {
       }
     }
   }
-  if (keyCode==82) {
-    mode = 0;
-    loadA();
+  if (keyCode == 32 && mode ==4) {
+    bullets.add(new Bullet(player.getX()+20));
+    bullets.add(new Bullet(player.getX()+30));
   }
+  if (keyCode==82) {
+    setup();
+  }
+  if(keyCode == 79){
+    mode = 4;
+  }  
 }
 

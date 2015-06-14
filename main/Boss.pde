@@ -1,16 +1,44 @@
 class Boss {
 
-  int hp = 500;
+  int hp;
+  int steps;
   int xcor, ycor;
   boolean alive;
-  
-  
+  boolean direction;
+  PImage alien;
 
-  void attack() {
+
+  Boss() {
+    hp = 500;
+    steps = 50;
+    xcor = 350;
+    ycor = 100;
+    alive = true;
+    direction = true;
+    alien = loadImage("boss.png");
   }
 
-  void specialAttack() {
+  void loadAlien() {
+    if (alive) {
+      image(alien, xcor, ycor, 300, 200);
+    } else {
+      xcor = 0;
+    }
   }
+
+
+  void move() {  
+    if (direction) {
+      xcor+=2;
+    } else {
+      xcor-=2;
+    }
+    steps--;
+    if (steps == 0) {
+      direction = !direction;
+      steps = 200;
+    }
+  }  
 
   void die() {
   }
