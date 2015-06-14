@@ -9,7 +9,7 @@ class Boss {
 
 
   Boss() {
-    hp = 500;
+    hp = 2000;
     steps = 50;
     xcor = 350;
     ycor = 100;
@@ -40,7 +40,15 @@ class Boss {
     }
   }  
 
+  void decHP() {
+    hp-=10;
+    if(hp <= 0){
+      alive = false;
+    }
+  }
+
   void die() {
+    alive = false;
   }
 
   void setX(int n) {

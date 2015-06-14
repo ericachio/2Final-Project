@@ -7,7 +7,7 @@ int level;
 PImage menu, instructions, end, arrow, alien1, alien2, alien3, ship;
 boolean fired;
 Player player;
-Boss balien;
+Boss bAlien;
 UFO oof;
 
 List<Bullet> bullets = new ArrayList<Bullet>();
@@ -31,7 +31,7 @@ void setup() {
   ship = loadImage("ship.png");
   arrow = loadImage("arrowkeys.jpg");
   player = new Player();
-  balien = new Boss();
+  bAlien = new Boss();
   oof = new UFO();
   loadA();
   loadW();
@@ -54,7 +54,7 @@ void draw() {
     GameOver();
   }
   if (mode == 4) {
-    player.lives++;
+    fill(255);
     Background();
     bosslevel();
   }
@@ -82,20 +82,25 @@ void play() {
   collision();
   if (count == 0) {
     mode = 4;
+    player.lives++;
   }
 }
 
 void bosslevel() {
   player.loadPlayer();
   player.mode();
-  balien.move();
-  balien.loadAlien();
+  bAlien.move();
+  bAlien.loadAlien();
   for ( Bullet b : bullets) {
     if (b.isFired()) {
       b.shoot();
       b.setY(7);
     }
   }
+  if (rand.nextInt(100) > 97) {
+    attack();
+  }
+  collide();
 }
 
 void Menu() {
@@ -246,6 +251,40 @@ void alienAttack() {
   }
 }
 
+void attack() {
+  bullets.add(new Bullet(bAlien.xcor+130, bAlien.ycor+150, 1, false));
+  bullets.add(new Bullet(bAlien.xcor+150, bAlien.ycor+170, 1, false));
+  bullets.add(new Bullet(bAlien.xcor+170, bAlien.ycor+150, 1, false));
+}
+
+
+void collide() {
+  for (Bullet b : bullets) {
+    if (bAlien.alive && b.player) {
+      if (b.getX() >= bAlien.xcor && b.getX() <= bAlien.xcor+300 &&
+        b.getY() >= bAlien.ycor && b.getY() <= bAlien.ycor+180) {
+        bAlien.decHP();
+        b.setH(true);
+        player.incPoints(10);
+        println("score "+player.points); 
+        //println("shot" + b.getX());
+      }
+    } else if (bAlien.alive && !b.player) {
+      println(b.getX());
+      if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&
+        b.getY() >= player.getY() && b.getY() <= player.getY()+50
+        ) {
+        println("ay");
+        b.setH(true);
+        player.decLives();
+        if (player.alive == false) {
+          mode = 3;
+        }
+      }
+    }
+  }
+}
+
 void collision() {
   for ( Bullet b : bullets) {
     if (b.isFired()) {
@@ -350,8 +389,10 @@ void keyPressed() {
   if (keyCode==82) {
     setup();
   }
-  if(keyCode == 79){
+  if (keyCode == 79) {
+    setup();
     mode = 4;
-  }  
+    player.lives++;
+  }
 }
 
