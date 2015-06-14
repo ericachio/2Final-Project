@@ -56,6 +56,12 @@ starting sprites
 2/13/15
 can only shoot one bullet at a time
 added different levels
+started boss stage
+
+2/14/15
+finished boss stage
+added cheats
+
 
 GOALS:
 menu and instructions page x
@@ -68,10 +74,11 @@ player shooting function x
 alien shooting function x
 track score, lives, and levels x
 walls x
-game over page 
-red ufo thing
-add upgrades to player/ship --> laser bullet thing??
+game over page x
+red ufo thing x
+add upgrades to player/ship x
 add sound effects and music
+sprites
 
 
 
