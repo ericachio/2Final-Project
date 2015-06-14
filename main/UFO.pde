@@ -31,9 +31,9 @@ class UFO {
   void move() {
     if (alive) {
       if (direction) {
-        xcor+=3;
+        xcor+=2;
       } else {
-        xcor-=3;
+        xcor-=2;
       }
     }
     if (xcor< 0 || xcor > 800) {
@@ -69,3 +69,4 @@ class UFO {
     ycor = n;
   }
 }
+

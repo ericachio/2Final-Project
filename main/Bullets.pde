@@ -65,21 +65,11 @@ class Bullet {
     } else if (!player && ycor + n <= 600) {
       ycor += n;
     }
-    if (ycor <= 20) {
+    if (ycor <= 20 || ycor >= 590) {
       fired = false;
     }
   }
-
-  void setXY(int x, int y) {
-    if (x >= 0 && x < 800) {
-      xcor = x;
-    }
-    if (y >= 0) {
-      ycor = y;
-    } else {
-      fired = false;
-    }
-  }
+ 
 
   boolean isFired() {
     return fired;

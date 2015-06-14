@@ -2,7 +2,7 @@ import java.util.*;
 
 //plz work
 int mode; //mode 0 is the menu & 1 is instructions
-int count = 5;
+int count = 40;
 PImage arrow, menu, instructions, alien1, alien2, alien3, ship;
 boolean fired;
 Player player;
@@ -59,6 +59,9 @@ void draw() {
   if (mode == 3) {
     displayGO();
   }
+  if(mode == 4){
+    bosslevel();
+  } 
 }
 
 void play() {
@@ -81,6 +84,9 @@ void play() {
   }
   alienAttack();
   collision();
+  if(count == 0){
+    mode = 4;
+  }
 }
 
 void Menu() {
@@ -89,6 +95,14 @@ void Menu() {
 
 void Instructions() {
   image(instructions, 100, 30, 600, 550);
+}
+
+void GameOver(){
+  
+}
+
+void bosslevel(){
+  
 }
 
 void Background() {
@@ -162,15 +176,15 @@ void loadA() {
     x+=60;
   }
   x = 100;
-   y = 280;
-   for (int i = 30; i < 40; i++) {
-   aliens_[i] = new aliens(x, y, 1);
-   x+=60;
-   }
+  y = 280;
+  for (int i = 30; i < 40; i++) {
+    aliens_[i] = new aliens(x, y, 1);
+    x+=60;
+  }
 }
 
 void loadW() {
-  int j = 100;
+  int j = 60;
   for (int i = 0; i < 4; i++) {
     walls_[i] = new Walls(j, 500);
     j+=200;
@@ -194,13 +208,13 @@ void collision() {
     if (b.isFired()) {
       b.shoot();
       b.setY(7);
-      if (b.player && oof.status()) {
-        if (b.getX() >= oof.getX() && b.getX() <= oof.getX()+40 &&
-          b.getY() >= oof.getY() && b.getY() <= oof.getY()+30) {
-          oof.die();
-          b.setH(true);
-          player.incPoints(100);
-        }
+      if (b.player && oof.status() &&
+        b.getX() >= oof.getX() && b.getX() <= oof.getX()+40 &&
+        b.getY() >= oof.getY() && b.getY() <= oof.getY()+30) {
+        oof.die();
+        b.setH(true);
+        player.incPoints(100);
+        //println("oops");
       }
       for (aliens a : aliens_) {
         if (b.player) {
@@ -208,6 +222,7 @@ void collision() {
             b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
             a.setS(false);
             b.setH(true);
+            count--;
             player.incPoints(a.level * 10);
             println("alevel "+a.level);
             println("score "+player.points); 
@@ -220,7 +235,7 @@ void collision() {
           b.getY() >= w.getY() && b.getY() <= w.getY()+20) {
           b.setH(true);
           w.decHP();
-          //println("shot" + b.getX());
+          println("shot" + b.getX());
         }
       }
       if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&

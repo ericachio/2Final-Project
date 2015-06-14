@@ -26,9 +26,9 @@ class Player {
       level = 1;
     } else if (points >= 150 && points < 400) {
       level = 2;
-    } else if (points >= 400 && points < 850) {
+    } else if (points >= 400 && points < 800) {
       level = 3;
-    } else if (points >= 850) {
+    } else if (points >= 800) {
       level = 4;
     }
   }
@@ -46,7 +46,7 @@ class Player {
 
     void decLives() {
       lives--;
-      if (lives < 0) {
+      if (lives == 0) {
         alive = false;
       }
     }

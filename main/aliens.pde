@@ -4,7 +4,7 @@ class aliens {
   PImage alien2 = loadImage("alien2.png");
   PImage alien3 = loadImage("alien3.png");
 
-  int alienHP;
+  int HP;
   int px, py;
   int level;
   int count;
@@ -26,7 +26,7 @@ class aliens {
   }
 
   void loadAlien() {
-    if (alive == true) {
+    if (alive) {
       if (level == 1) {
         image(alien1, px, py, 40, 30);
       } else if (level == 2) {
@@ -34,8 +34,8 @@ class aliens {
       } else if (level == 3) {
         image(alien3, px, py, 40, 30);
       }
-    } else if (alive == false) {
-      setPosition(0);
+    } else{
+      px = 0;
     }
   }
 
