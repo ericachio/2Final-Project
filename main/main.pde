@@ -3,11 +3,11 @@ import java.util.*;
 //plz work
 int mode; //mode 0 is the menu & 1 is instructions
 int count = 40;
-PImage arrow, menu, instructions, alien1, alien2, alien3, ship;
+int level;
+PImage menu, instructions, end, arrow, alien1, alien2, alien3, ship;
 boolean fired;
 Player player;
 UFO oof;
-int level;
 
 List<Bullet> bullets = new ArrayList<Bullet>();
 aliens[] aliens_ = new aliens[40];
@@ -20,13 +20,14 @@ void setup() {
   size(800, 600);
   background(0, 0, 0);
   mode = 0;
-  arrow = loadImage("arrowkeys.jpg");
   menu = loadImage("menu.png");
+  instructions = loadImage("instructions.png");
+  end = loadImage("gameover2.png");
   alien1 = loadImage("alien1.png");
   alien2 = loadImage("alien2.png");
   alien3 = loadImage("alien3.png");
   ship = loadImage("ship.png");
-  instructions = loadImage("instructions.png");
+  arrow = loadImage("arrowkeys.jpg");
   player = new Player();
   oof = new UFO();
   loadA();
@@ -36,16 +37,6 @@ void setup() {
 
 void draw() {
   background(0, 0, 0);
-  if (mouseX >= 300 && mouseX <= 505 &&
-    mouseY >= 508 && mouseY <= 535 && mode == 0) {
-    //instr
-  } else if (mouseX >= 346 && mouseX <= 455 &&
-    mouseY >= 455 && mouseY <= 480 && mode == 0) {
-    //play
-  } else if (mouseX >= 346 && mouseX <= 455 &&
-    mouseY >= 484 && mouseY <= 505 && mode == 1) {
-    //play
-  }
   if (mode == 0) {
     Menu();
   }
@@ -57,11 +48,11 @@ void draw() {
     play();
   }
   if (mode == 3) {
-    displayGO();
+    GameOver();
   }
-  if(mode == 4){
+  if (mode == 4) {
     bosslevel();
-  } 
+  }
 }
 
 void play() {
@@ -84,25 +75,60 @@ void play() {
   }
   alienAttack();
   collision();
-  if(count == 0){
+  if (count == 0) {
     mode = 4;
   }
 }
 
 void Menu() {
   image(menu, 100, 30, 600, 550);
+  if (mouseX >= 346 && mouseX <= 455 &&
+    mouseY >= 455 && mouseY <= 480) {
+    fill(0, 255, 30);
+  } else { 
+    fill(255);
+  }
+  textSize(36);
+  textAlign(CENTER);
+  text("Start", 400, 480);
+  if (mouseX >= 295 && mouseX <= 505 &&
+    mouseY >= 508 && mouseY <= 535) {
+    fill(0, 255, 30);
+  } else { 
+    fill(255);
+  }
+  textSize(36);
+  textAlign(CENTER);
+  text("Instructions", 400, 530);
 }
 
 void Instructions() {
   image(instructions, 100, 30, 600, 550);
+  if ( mouseX >= 360 && mouseX <= 450 &&
+    mouseY >= 475 && mouseY <= 505) {
+    fill(0, 255, 30);
+  } else { 
+    fill(255);
+  }
+  textSize(36);
+  textAlign(CENTER);
+  text("Start", 400, 500);
 }
 
-void GameOver(){
-  
+void GameOver() {
+  image(end, 0, 0, 800, 600);
+  if (mouseX >= 300 && mouseX <= 500 && 
+    mouseY >= 440 && mouseY <= 490) {
+    fill(0, 255, 30);
+  } else { 
+    fill(255);
+  }
+  textSize(36);
+  textAlign(CENTER);
+  text("Play Again?", 400, 480);
 }
 
-void bosslevel(){
-  
+void bosslevel() {
 }
 
 void Background() {
@@ -254,20 +280,18 @@ void collision() {
 
 void mouseClicked() {
   println(mouseX + ", " + mouseY);
-  if (mouseX >= 300 && mouseX <= 505 &&
+  if (mouseX >= 295 && mouseX <= 505 &&
     mouseY >= 508 && mouseY <= 535 && mode == 0) {
     mode = 1; //instr
   } else if (mouseX >= 346 && mouseX <= 455 &&
     mouseY >= 455 && mouseY <= 480 && mode == 0) {
     mode = 2; //play
-  } else if (mouseX >= 346 && mouseX <= 455 &&
-    mouseY >= 484 && mouseY <= 505 && mode == 1) {
+  } else if ( mouseX >= 360 && mouseX <= 450 &&
+    mouseY >= 475 && mouseY <= 505 && mode == 1) {
     mode = 2;
-  } else if (mouseX >= 290 && mouseX <= 515 &&
-    mouseY >= 160 && mouseY <= 210 && mode == 3) {
+  } else if (mouseX >= 300 && mouseX <= 500 && 
+    mouseY >= 440 && mouseY <= 490 && mode == 3) {
     setup();
-
-    mode = 2;
   }
 }
 
