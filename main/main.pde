@@ -4,13 +4,14 @@ import java.util.*;
 int mode; //mode 0 is the menu & 1 is uctions
 int count;
 int level;
-PImage menu, instructions, end, arrow, alien1, alien2, alien3, ship;
+PImage menu, instructions, end, win, arrow;
+PImage alien1, alien2, alien3, ship;
 boolean fired;
 Player player;
 Boss bAlien;
 UFO oof;
 
-List<Bullet> bullets = new ArrayList<Bullet>();
+List<Bullet> bullets;
 aliens[] aliens_ = new aliens[40];
 Walls[] walls_ = new Walls[4];
 
@@ -25,6 +26,7 @@ void setup() {
   menu = loadImage("menu.png");
   instructions = loadImage("instructions.png");
   end = loadImage("gameover2.png");
+  win = loadImage("end.jpg");
   alien1 = loadImage("alien1.png");
   alien2 = loadImage("alien2.png");
   alien3 = loadImage("alien3.png");
@@ -33,6 +35,7 @@ void setup() {
   player = new Player();
   bAlien = new Boss();
   oof = new UFO();
+  bullets = new ArrayList<Bullet>();
   loadA();
   loadW();
   level = 1;
@@ -59,6 +62,9 @@ void draw() {
     fill(100);
     bosslevel();
   }
+  if (mode == 5) {
+    YouWin();
+  }
 }
 
 void play() {
@@ -72,7 +78,7 @@ void play() {
   for (aliens a : aliens_) {
     a.moveAlien();
     a.loadAlien();
-    if (a.getPY()>500) {
+    if (a.alive && a.getPY()>500) {
       mode = 3;
     }
   }
@@ -82,6 +88,7 @@ void play() {
   alienAttack();
   collision();
   if (count == 0) {
+    bullets = new ArrayList<Bullet>();
     mode = 4;
     player.lives++;
   }
@@ -93,8 +100,11 @@ void bosslevel() {
   bAlien.move();
   bAlien.loadAlien();
   bAlien.displayHP();
+  if (!bAlien.alive) {
+    mode = 5;
+  }
   for (Walls w : walls_) {
-    fill(0,225,0);
+    fill(0, 225, 0);
     w.loadWall();
   }
   for ( Bullet b : bullets) {
@@ -157,8 +167,22 @@ void GameOver() {
   text("Play Again?", 400, 480);
 }
 
+void YouWin() {
+  image(win, 0, 50, 800, 600);
+  if (mouseX >= 300 && mouseX <= 500 && 
+    mouseY >= 440 && mouseY <= 490) {
+    fill(0, 255, 30);
+  } else { 
+    fill(255);
+  }
+  textSize(36);
+  textAlign(CENTER);
+  text("Play Again?", 400, 480);
+}
+
+
 void Background() {
- fill(255,255,255);
+  fill(255, 255, 255);
   textSize(22);
   textAlign(LEFT);
   text("Score: "+player.points, 50, 50);
