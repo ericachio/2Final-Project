@@ -3,6 +3,9 @@ class aliens {
   PImage alien1 = loadImage("alien1.png");
   PImage alien2 = loadImage("alien2.png");
   PImage alien3 = loadImage("alien3.png");
+  PImage[] alien;
+  int step;
+  int x;
 
   int HP;
   int px, py;
@@ -26,16 +29,36 @@ class aliens {
   }
 
   void loadAlien() {
+    x = 0;
+    alien = new PImage[2];
     if (alive) {
       if (level == 1) {
-        image(alien1, px, py, 40, 30);
+        for (int n = 0; n < 2; n++) {
+          alien[n] = alien1.get(x, 0, 115, 80);
+          x+=115;
+        }
       } else if (level == 2) {
-        image(alien2, px, py, 40, 30);
+        for (int n = 0; n < 2; n++) {
+          alien[n] = alien2.get(x, 0, 105, 80);
+          x+=105;
+        }
       } else if (level == 3) {
-        image(alien3, px, py, 40, 30);
+        for (int n = 0; n < 2; n++) {
+          alien[n] = alien3.get(x, 0, 90, 80);
+          x+=90;
+        }
       }
-    } else{
+    } else {
       px = 0;
+    }
+  }
+
+  void action() {
+    step = 0;
+    image(alien[step], px, py, 40, 30);
+    step++;
+    if (step >= alien.length -1) {
+      step = 0;
     }
   }
 
@@ -74,50 +97,50 @@ class aliens {
       count = 10;
     }
   }  
-  
+
   /*
   //will be a recursive to move alien across the screen
-  void move(int positionx, int positiony) {
-    if (positiony == 100) {
-      if (positionx < 600) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx += 1;
-        px = positionx;
-        py = positiony;
-        playerAlive = true;
-      } //else {
-      //image(alien, positionx, positiony, 80, 80);
-      //move(positionx, positiony);
-      else if (positionx > 100) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx -= 1;
-        px = positionx;
-        py = positiony;
-      } else {
-        image(alien, positionx, positiony, 80, 80);
-        move(positionx, positiony + 160);
-      }
-    } else if (positiony == 260) {
-      if (positionx > 100) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx -= 1;
-        px = positionx;
-        py = positiony;
-      } else {
-        image(alien, positionx, positiony, 80, 80);
-        move(positionx, positiony + 160);
-      }
-    } else if (positiony == 420) { 
-      if (positionx < 600) {
-        image(alien, positionx, positiony, 80, 80);
-        positionx += 1;
-        px = positionx;
-        py = positiony;
-        playerAlive = false;
-      }
-    }
-  }
-*/
+   void move(int positionx, int positiony) {
+   if (positiony == 100) {
+   if (positionx < 600) {
+   image(alien, positionx, positiony, 80, 80);
+   positionx += 1;
+   px = positionx;
+   py = positiony;
+   playerAlive = true;
+   } //else {
+   //image(alien, positionx, positiony, 80, 80);
+   //move(positionx, positiony);
+   else if (positionx > 100) {
+   image(alien, positionx, positiony, 80, 80);
+   positionx -= 1;
+   px = positionx;
+   py = positiony;
+   } else {
+   image(alien, positionx, positiony, 80, 80);
+   move(positionx, positiony + 160);
+   }
+   } else if (positiony == 260) {
+   if (positionx > 100) {
+   image(alien, positionx, positiony, 80, 80);
+   positionx -= 1;
+   px = positionx;
+   py = positiony;
+   } else {
+   image(alien, positionx, positiony, 80, 80);
+   move(positionx, positiony + 160);
+   }
+   } else if (positiony == 420) { 
+   if (positionx < 600) {
+   image(alien, positionx, positiony, 80, 80);
+   positionx += 1;
+   px = positionx;
+   py = positiony;
+   playerAlive = false;
+   }
+   }
+   }
+   */
 
   boolean isShot() {
     return alive;
@@ -127,3 +150,4 @@ class aliens {
     alive = b;
   }
 }
+

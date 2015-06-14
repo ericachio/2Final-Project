@@ -69,8 +69,9 @@ void play() {
   oof.move();
   oof.load();
   for (aliens a : aliens_) {
-    a.moveAlien();
     a.loadAlien();
+    a.moveAlien();
+    a.action();
     if (a.getPY()>500) {
       mode = 3;
     }
