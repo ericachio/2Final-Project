@@ -99,12 +99,14 @@ void play() {
   Background();
   player.loadPlayer();
   player.mode();
-  if (!oof.alive && rand.nextInt(1500) == 1) {
-    oof = new UFO(rand.nextInt(1)==0);
+  if (!oof.alive && rand.nextInt(1300) == 1) {
+    oof = new UFO(rand.nextInt(2)==0);
   }
   if (oof.alive) {
-    ufoo.rewind();
     ufoo.play();
+  }else{
+    ufoo.rewind();
+    ufoo.pause();
   }
   oof.move();
   oof.load();
@@ -122,8 +124,8 @@ void play() {
   alienAttack();
   collision();
   if (count == 0) {
-    bullets = new ArrayList<Bullet>();
     boss.loop();
+    bullets = new ArrayList<Bullet>();
     mode = 4;
     player.lives++;
   }
@@ -136,6 +138,8 @@ void bosslevel() {
   bAlien.loadAlien();
   bAlien.displayHP();
   if (!bAlien.alive) {
+    explode.rewind();
+    explode.play();
     mode = 5;
   }
   for (Walls w : walls_) {
@@ -342,7 +346,8 @@ void collide() {
       println(b.getX());
       if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&
         b.getY() >= player.getY() && b.getY() <= player.getY()+40) {
-        println("ay");
+        explode.rewind();
+        explode.play();
         b.setH(true);
         player.decLives();
         if (!player.alive) {
