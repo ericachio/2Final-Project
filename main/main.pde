@@ -1,12 +1,15 @@
 import java.util.*;
+import ddf.minim.*;
+
 
 //plz work
 int mode; //mode 0 is the menu & 1 is uctions
 int count;
 int level;
-PImage menu, instructions, end, win, arrow;
+PImage menu, instructions, end, win, arrow, back;
 PImage alien1, alien2, alien3, ship;
 boolean fired;
+boolean wall = false;
 Player player;
 Boss bAlien;
 UFO oof;
@@ -17,10 +20,12 @@ Walls[] walls_ = new Walls[4];
 
 Random rand = new Random();
 
+Minim boss_, ufoo_, shoot_, killed_, explode_;
+AudioPlayer boss, ufoo, shoot, killed, explode;
+
 
 void setup() {
   size(800, 600);
-  background(0, 0, 0);
   mode = 0;
   count = 40;
   menu = loadImage("menu.png");
@@ -32,6 +37,7 @@ void setup() {
   alien3 = loadImage("alien3.png");
   ship = loadImage("ship.png");
   arrow = loadImage("arrowkeys.jpg");
+  back = loadImage("space.jpg");
   player = new Player();
   bAlien = new Boss();
   oof = new UFO();
@@ -39,22 +45,44 @@ void setup() {
   loadA();
   loadW();
   level = 1;
+  boss_ = new Minim(this);
+  boss = boss_.loadFile("battle2.mp3");
+  ufoo_ = new Minim(this);
+  ufoo = ufoo_.loadFile("ufolow.wav");
+  shoot_ = new Minim(this);
+  shoot = shoot_.loadFile("shoot.wav");
+  killed_ = new Minim(this);
+  killed = killed_.loadFile("killed.wav");
+  explode_ = new Minim(this);
+  explode = explode_.loadFile("explosion.wav");
 }
 
 void draw() {
-  background(0, 0, 0);
+  background(0);
   if (mode == 0) {
+    if (boss.isPlaying()) {
+      boss.pause();
+    }
     Menu();
   }
   if (mode == 1) {
+    if (boss.isPlaying()) {
+      boss.pause();
+    }
     Instructions();
   }
   if (mode == 2) {
+    if (boss.isPlaying()) {
+      boss.pause();
+    }
     Background();
     fill(100);
     play();
   }
   if (mode == 3) {
+    if (boss.isPlaying()) {
+      boss.pause();
+    }
     GameOver();
   }
   if (mode == 4) {
@@ -68,10 +96,15 @@ void draw() {
 }
 
 void play() {
+  Background();
   player.loadPlayer();
   player.mode();
   if (!oof.alive && rand.nextInt(1500) == 1) {
     oof = new UFO(rand.nextInt(1)==0);
+  }
+  if (oof.alive) {
+    ufoo.rewind();
+    ufoo.play();
   }
   oof.move();
   oof.load();
@@ -90,6 +123,7 @@ void play() {
   collision();
   if (count == 0) {
     bullets = new ArrayList<Bullet>();
+    boss.loop();
     mode = 4;
     player.lives++;
   }
@@ -344,6 +378,8 @@ void collision() {
         if (a.alive && b.player) {
           if (b.getX() >= a.getPX() && b.getX() <= a.getPX()+40 &&
             b.getY() >= a.getPY() && b.getY() <= a.getPY()+30) {
+            killed.rewind();
+            killed.play();
             a.setS(false);
             b.setH(true);
             count--;
@@ -364,9 +400,11 @@ void collision() {
       }
       if (b.getX() >= player.getX() && b.getX() <= player.getX()+50 &&
         b.getY() >= player.getY() && b.getY() <= player.getY()+40) {
+        explode.rewind();
+        explode.play();
         b.setH(true);
         player.decLives();
-        if (player.alive == false) {
+        if (!player.alive) {
           mode = 3;
         }
       }
@@ -392,6 +430,9 @@ void mouseClicked() {
     setup();
   } else if (mouseX >= 300 && mouseX <= 500 && 
     mouseY >= 440 && mouseY <= 490 && mode == 5) {
+    if (boss.isPlaying()) {
+      boss.pause();
+    }
     setup();
   }
 }
@@ -417,29 +458,38 @@ void keyPressed() {
     if (!fired) {
       if (player.level == 1) {
         bullets.add(new Bullet(player.getX()+25));
+        shoot.rewind();
+        shoot.play();
       } else if (player.level == 2) {
         bullets.add(new Bullet(player.getX()+25, player.getY()-40));
         bullets.add(new Bullet(player.getX()+25, player.getY()));
+        shoot.rewind();
+        shoot.play();
       } else if (player.level > 2) {
         bullets.add(new Bullet(player.getX()+5));
         bullets.add(new Bullet(player.getX()+25, player.getY()-20));
         bullets.add(new Bullet(player.getX()+45));
+        shoot.rewind();
+        shoot.play();
       }
     }
   }
   if (keyCode == 32 && mode ==4) {
     bullets.add(new Bullet(player.getX()+20));
     bullets.add(new Bullet(player.getX()+30));
+    shoot.rewind();
+    shoot.play();
   }
   if (keyCode==82) {
     setup();
   }
   if (keyCode == 79) {
     setup();
+    boss.loop();
     mode = 4;
     player.lives++;
   }
-  if(keyCode == 87){
+  if (keyCode == 87) {
     player.lives++;
   }
 }
