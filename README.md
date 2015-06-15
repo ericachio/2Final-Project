@@ -61,6 +61,7 @@ started boss stage
 2/14/15
 finished boss stage
 added cheats
+added sounds
 
 
 GOALS:
@@ -77,7 +78,7 @@ walls x
 game over page x
 red ufo thing x
 add upgrades to player/ship x
-add sound effects and music
+add sound effects and music x
 sprites
 
 
